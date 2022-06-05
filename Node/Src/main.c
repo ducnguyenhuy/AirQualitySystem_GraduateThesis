@@ -4,6 +4,7 @@
 #include "rng.h"
 #include "spi.h"
 #include "gpio.h"
+#include "adc.h"
 
 /* Private includes */
 #include "app.h"
@@ -11,6 +12,7 @@
 /* Private function prototypes */
 void SystemClock_Config(void);
 
+uint32_t adcVal;
 
 int main(void)
 {
@@ -24,13 +26,18 @@ int main(void)
   MX_GPIO_Init();
   MX_RNG_Init();
   MX_SPI2_Init();
+	MX_ADC_Init();
   MX_USART1_UART_Init();
   MX_LPUART1_UART_Init();
 
   /* Infinite loop */
   while (1)
   {
-		App_Main();
+		//App_Main();
+		HAL_ADC_Start(&hadc);
+		adcVal = HAL_ADC_GetValue(&hadc);
+		HAL_Delay(1000);
+		HAL_ADC_Stop(&hadc);
   }
 }
 
@@ -129,4 +136,4 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/*****END OF FILE****/
