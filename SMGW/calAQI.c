@@ -4,7 +4,7 @@
 
 #define NUMBER_SAMPLE_PER_HOUR  10
 
-int pm25Index = 0, coIndex = 0, buff12hIndex = 0;
+int pm25Index = 0, coIndex = 0, buff12hIndex = 11;
 
 
 float I[8] = {0, 50, 100, 150, 200, 300, 400, 500};
@@ -121,9 +121,10 @@ float cal_aqi_pm25(data_of_node_t *data_node)
     float nowCast = 0;
     float sumOfThree = 0;
     float up = 0, down = 0;
+    
     if(buff12hIndex != 11)
     {
-        printf("Can't not calculate AQI of PM25");
+        printf("Can't not calculate AQI of PM25\n");
         return -1;
     }
 
@@ -143,23 +144,26 @@ float cal_aqi_pm25(data_of_node_t *data_node)
     }
     
     weightIndex = Cmin/Cmax;
-    if(weightIndex < 0.5)
+    if(weightIndex <= 0.5)
     {
         weightIndex = 0.5;
         for(int i = 0; i < 12; i++)
         {
+            /* Calculate nowCast value if weight index =< 0.5 */
             nowCast += pow(0.5, (i+1))*(data_node->valPM25.buff_12_h[i]);
         }
     }
     else {
         for(int i = 0; i < 12; i++)
         {
-            up += pow(weightIndex, i)*(data_node->valPM25.buff_12_h[i]);
+            up += pow(weightIndex, i)*(data_node->valPM25.buff_12_h[11-i]);
             down += pow(weightIndex, i);
         }
+        /* Calculate nowCast value if weight index > 0.5 */
         nowCast = up/down;
     }
     
+    /* Check if two of three value (C0, C1, C2) is zero -> can't calculate AQI */
     sumOfThree = data_node->valPM25.buff_12_h[0] + data_node->valPM25.buff_12_h[1] + data_node->valPM25.buff_12_h[2];
 
     if(sumOfThree == data_node->valPM25.buff_12_h[0] || sumOfThree == data_node->valPM25.buff_12_h[1] || sumOfThree == data_node->valPM25.buff_12_h[2])
@@ -176,6 +180,7 @@ float cal_aqi_pm25(data_of_node_t *data_node)
             j = i;
         }
     }
+    /* Formula air quality */
     float aqi = (( (I[j+1] - I[j]) / (BP_PM25[j+1] - BP_PM25[j]) ) * (nowCast - BP_PM25[j]) + I[j]);
     if( j == 7)
     {
@@ -188,22 +193,40 @@ float cal_aqi_pm25(data_of_node_t *data_node)
 
 int main()
 {
+//     for(int i = 0; i < 3*(NUMBER_SAMPLE_PER_HOUR); i++)
+//     {
+//         update_data(data_node, i, i);
+//     }
+//     float mean;
+//     for(int i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
+//     {
+//         printf("%f\n", data_node->valPM25.pm_data_now[i]);
+//     }
+//     printf("%f\n", data_node->valPM25.buff_12_h[0]);
+//     printf("%f\n", data_node->valPM25.buff_12_h[1]);
+//     printf("%f\n", data_node->valPM25.buff_12_h[2]);
+
+    
     data_of_node_t *data_node, data;
     data_node = &data;
 
-    for(int i = 0; i < 3*(NUMBER_SAMPLE_PER_HOUR); i++)
-    {
-        update_data(data_node, i, i);
-    }
-    float mean;
+    float aqi_pm25;
 
-    for(int i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
-    {
-        printf("%f\n", data_node->valPM25.pm_data_now[i]);
-    }
-    printf("%f\n", data_node->valPM25.buff_12_h[0]);
-    printf("%f\n", data_node->valPM25.buff_12_h[1]);
-    printf("%f\n", data_node->valPM25.buff_12_h[2]);
+    data_node->valPM25.buff_12_h[0] = 26.9;
+    data_node->valPM25.buff_12_h[1] =  24.7;
+    data_node->valPM25.buff_12_h[2] =  20.5;
+    data_node->valPM25.buff_12_h[3] =  23.5;
+    data_node->valPM25.buff_12_h[4] =  19.5;
+    data_node->valPM25.buff_12_h[5] =  16.5;
+    data_node->valPM25.buff_12_h[6] =  19.0;
+    data_node->valPM25.buff_12_h[7] =  16.5;
+    data_node->valPM25.buff_12_h[8] =  20.3;
+    data_node->valPM25.buff_12_h[9] =  22.4;
+    data_node->valPM25.buff_12_h[10] =  19.6;
+    data_node->valPM25.buff_12_h[11] =  20.6;
+
+    aqi_pm25 = cal_aqi_pm25(data_node);
+    printf("Value AQI PM25 = %f\n", aqi_pm25);
 
     return 0;
 }
