@@ -29,66 +29,70 @@ typedef struct
 {
     pm_2_5_t valPM25;
     co_t     valCO;
+    long long int nodeAddr;
+    int pm25Index;
+    int coIndex;
 } data_of_node_t;
 
+data_of_node_t data_node;
 
 /* Calculate mean of co */
-float mean_of_co(data_of_node_t *data_node)
+float mean_of_co(data_of_node_t data_node)
 {
     float sum = 0;
     int i;
     for(i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
     {
-        sum += data_node->valCO.co_data_now[i];
+        sum += data_node.valCO.co_data_now[i];
     }
     return sum/NUMBER_SAMPLE_PER_HOUR;
 }
 
 /* Calculate mean of pm2.5 */
-float mean_of_pm25(data_of_node_t *data_node)
+float mean_of_pm25(data_of_node_t data_node)
 {
     float sum = 0;
     int i;
     for(i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
     {
-        sum += data_node->valPM25.pm_data_now[i];
+        sum += data_node.valPM25.pm_data_now[i];
     }
     return sum/NUMBER_SAMPLE_PER_HOUR;
 }
 
-void update_data(data_of_node_t *data_node, float valPm25, float valCo)
+void update_data(data_of_node_t data_node, float valPm25, float valCo)
 {
     int i;
-    data_node->valPM25.pm_data_now[pm25Index] = valPm25;
-    data_node->valCO.co_data_now[coIndex] = valCo;
+    data_node.valPM25.pm_data_now[data_node.pm25Index] = valPm25;
+    data_node.valCO.co_data_now[data_node.coIndex] = valCo;
 
-    pm25Index++;
-    coIndex++;
+    data_node.pm25Index++;
+    data_node.coIndex++;
     
 
-    if(pm25Index == NUMBER_SAMPLE_PER_HOUR)
+    if(data_node.pm25Index == NUMBER_SAMPLE_PER_HOUR)
     {
         if(buff12hIndex == 11)
         {
             for(i = 0; i < 12; i++)
             {
-                data_node->valPM25.buff_12_h[i] = data_node->valPM25.buff_12_h[i+1];
+                data_node.valPM25.buff_12_h[i] = data_node.valPM25.buff_12_h[i+1];
             }
-            data_node->valPM25.buff_12_h[11] = mean_of_pm25(data_node);
+            data_node.valPM25.buff_12_h[11] = mean_of_pm25(data_node);
         }
         else
         {
-            data_node->valPM25.buff_12_h[buff12hIndex] = mean_of_pm25(data_node);
+            data_node.valPM25.buff_12_h[buff12hIndex] = mean_of_pm25(data_node);
             buff12hIndex++;
         }
-        pm25Index = 0;
+        data_node.pm25Index = 0;
     }
     
-    if(coIndex == NUMBER_SAMPLE_PER_HOUR)
-        coIndex = 0;
+    if(data_node.coIndex == NUMBER_SAMPLE_PER_HOUR)
+        data_node.coIndex = 0;
 }
 
-float cal_aqi_co(data_of_node_t *data_node)
+float cal_aqi_co(data_of_node_t data_node)
 {
     float co_mean;
     co_mean = mean_of_co(data_node);
@@ -114,7 +118,7 @@ float cal_aqi_co(data_of_node_t *data_node)
     }
 }
 
-float cal_aqi_pm25(data_of_node_t *data_node)
+float cal_aqi_pm25(data_of_node_t data_node)
 {
     float weightIndex;
     float Cmax, Cmin;
@@ -128,18 +132,18 @@ float cal_aqi_pm25(data_of_node_t *data_node)
         return -1;
     }
 
-    Cmax = data_node->valPM25.buff_12_h[0];
-    Cmin = data_node->valPM25.buff_12_h[0];
+    Cmax = data_node.valPM25.buff_12_h[0];
+    Cmin = data_node.valPM25.buff_12_h[0];
 
     for(int i = 0; i < 12; i ++)
     {
-        if(Cmax < data_node->valPM25.buff_12_h[i])
+        if(Cmax < data_node.valPM25.buff_12_h[i])
         {
-            Cmax = data_node->valPM25.buff_12_h[i];
+            Cmax = data_node.valPM25.buff_12_h[i];
         }
-        if(Cmin > data_node->valPM25.buff_12_h[i])
+        if(Cmin > data_node.valPM25.buff_12_h[i])
         {
-            Cmin = data_node->valPM25.buff_12_h[i];
+            Cmin = data_node.valPM25.buff_12_h[i];
         }
     }
     
@@ -150,23 +154,23 @@ float cal_aqi_pm25(data_of_node_t *data_node)
         for(int i = 0; i < 12; i++)
         {
             /* Calculate nowCast value if weight index =< 0.5 */
-            nowCast += pow(0.5, (i+1))*(data_node->valPM25.buff_12_h[i]);
+            nowCast += pow(0.5, (i+1))*(data_node.valPM25.buff_12_h[i]);
         }
     }
     else {
         for(int i = 0; i < 12; i++)
         {
-            up += pow(weightIndex, i)*(data_node->valPM25.buff_12_h[11-i]);
+            up += pow(weightIndex, i)*(data_node.valPM25.buff_12_h[11-i]);
             down += pow(weightIndex, i);
         }
         /* Calculate nowCast value if weight index > 0.5 */
         nowCast = up/down;
     }
     
-    /* Check if two of three value (C0, C1, C2) is zero -> can't calculate AQI */
-    sumOfThree = data_node->valPM25.buff_12_h[0] + data_node->valPM25.buff_12_h[1] + data_node->valPM25.buff_12_h[2];
+    /* Check if two of three value (C0, C1, C2) is zero . can't calculate AQI */
+    sumOfThree = data_node.valPM25.buff_12_h[0] + data_node.valPM25.buff_12_h[1] + data_node.valPM25.buff_12_h[2];
 
-    if(sumOfThree == data_node->valPM25.buff_12_h[0] || sumOfThree == data_node->valPM25.buff_12_h[1] || sumOfThree == data_node->valPM25.buff_12_h[2])
+    if(sumOfThree == data_node.valPM25.buff_12_h[0] || sumOfThree == data_node.valPM25.buff_12_h[1] || sumOfThree == data_node.valPM25.buff_12_h[2])
     {
         printf("Can't calculate AQI \n");
         return -1;
@@ -193,38 +197,22 @@ float cal_aqi_pm25(data_of_node_t *data_node)
 
 int main()
 {
-//     for(int i = 0; i < 3*(NUMBER_SAMPLE_PER_HOUR); i++)
-//     {
-//         update_data(data_node, i, i);
-//     }
-//     float mean;
-//     for(int i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
-//     {
-//         printf("%f\n", data_node->valPM25.pm_data_now[i]);
-//     }
-//     printf("%f\n", data_node->valPM25.buff_12_h[0]);
-//     printf("%f\n", data_node->valPM25.buff_12_h[1]);
-//     printf("%f\n", data_node->valPM25.buff_12_h[2]);
-
-    
-    data_of_node_t *data_node, data;
-    data_node = &data;
-
     float aqi_pm25;
 
-    data_node->valPM25.buff_12_h[0] = 26.9;
-    data_node->valPM25.buff_12_h[1] =  24.7;
-    data_node->valPM25.buff_12_h[2] =  20.5;
-    data_node->valPM25.buff_12_h[3] =  23.5;
-    data_node->valPM25.buff_12_h[4] =  19.5;
-    data_node->valPM25.buff_12_h[5] =  16.5;
-    data_node->valPM25.buff_12_h[6] =  19.0;
-    data_node->valPM25.buff_12_h[7] =  16.5;
-    data_node->valPM25.buff_12_h[8] =  20.3;
-    data_node->valPM25.buff_12_h[9] =  22.4;
-    data_node->valPM25.buff_12_h[10] =  19.6;
-    data_node->valPM25.buff_12_h[11] =  20.6;
-
+    data_node.valPM25.buff_12_h[0] = 26.9;
+    data_node.valPM25.buff_12_h[1] =  24.7;
+    data_node.valPM25.buff_12_h[2] =  20.5;
+    data_node.valPM25.buff_12_h[3] =  23.5;
+    data_node.valPM25.buff_12_h[4] =  19.5;
+    data_node.valPM25.buff_12_h[5] =  16.5;
+    data_node.valPM25.buff_12_h[6] =  19.0;
+    data_node.valPM25.buff_12_h[7] =  16.5;
+    data_node.valPM25.buff_12_h[8] =  20.3;
+    data_node.valPM25.buff_12_h[9] =  22.4;
+    data_node.valPM25.buff_12_h[10] =  19.6;
+    data_node.valPM25.buff_12_h[11] =  20.6;
+    data_node.nodeAddr = (4294967295);
+    printf("Value: %llu\n", data_node.nodeAddr);
     aqi_pm25 = cal_aqi_pm25(data_node);
     printf("Value AQI PM25 = %f\n", aqi_pm25);
 
