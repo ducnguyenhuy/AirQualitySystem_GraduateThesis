@@ -8,6 +8,7 @@
 
 #define DEVICE                          "/dev/ttyUSB2"
 
+/* Write command via USB port */
 static Std_ReturnType SMS_SendWriteCommand(char *pcCommand, uint32_t u32CommandLen)
 {
     Std_ReturnType ret = E_NOK;

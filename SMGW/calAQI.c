@@ -199,20 +199,18 @@ int main()
 {
     float aqi_pm25;
 
-    data_node.valPM25.buff_12_h[0] = 26.9;
-    data_node.valPM25.buff_12_h[1] =  24.7;
-    data_node.valPM25.buff_12_h[2] =  20.5;
-    data_node.valPM25.buff_12_h[3] =  23.5;
-    data_node.valPM25.buff_12_h[4] =  19.5;
-    data_node.valPM25.buff_12_h[5] =  16.5;
-    data_node.valPM25.buff_12_h[6] =  19.0;
-    data_node.valPM25.buff_12_h[7] =  16.5;
-    data_node.valPM25.buff_12_h[8] =  20.3;
-    data_node.valPM25.buff_12_h[9] =  22.4;
-    data_node.valPM25.buff_12_h[10] =  19.6;
-    data_node.valPM25.buff_12_h[11] =  20.6;
-    data_node.nodeAddr = (4294967295);
-    printf("Value: %llu\n", data_node.nodeAddr);
+    data_node.valPM25.buff_12_h[0] = 34.6;
+    data_node.valPM25.buff_12_h[1] =  34.599998;
+    data_node.valPM25.buff_12_h[2] =  34.599998;
+    data_node.valPM25.buff_12_h[3] =  4.6;
+    data_node.valPM25.buff_12_h[4] =  4.6;
+    data_node.valPM25.buff_12_h[5] =  4.6;
+    data_node.valPM25.buff_12_h[6] =  4.6;
+    data_node.valPM25.buff_12_h[7] =  4.6;
+    data_node.valPM25.buff_12_h[8] =  4.6;
+    data_node.valPM25.buff_12_h[9] =  4.6;
+    data_node.valPM25.buff_12_h[10] =  4.6;
+    data_node.valPM25.buff_12_h[11] =  4.6;
     aqi_pm25 = cal_aqi_pm25(data_node);
     printf("Value AQI PM25 = %f\n", aqi_pm25);
 

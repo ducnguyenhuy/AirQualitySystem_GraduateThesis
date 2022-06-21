@@ -31,6 +31,8 @@
 #include "Std_Types.h"
 
 #define PORT 23
+// GW IP 7
+//#define GW_ADDR ((7<<24) | (201<<16) | (0<<8) | 0)
 #define GW_ADDR ((255<<24) | (255<<16) | (0<<8) | 0)
 /* -------------------------------------------------------------------------- */
 /* --- PRIVATE MACROS ------------------------------------------------------- */
@@ -118,276 +120,6 @@ void thread_valid(void);
 
 static Std_ReturnType LoRaSV_SendACK();
 
-/*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
-
-#define NUMBER_SAMPLE_PER_HOUR  10
-#define MAX_NUMBER_NODE         2
-
-int buff12hIndex = 0;
-int bufferNodeIndex = 0;
-
-float I[8] = {0, 50, 100, 150, 200, 300, 400, 500};
-float BP_CO[8] = {0, 10, 30, 45, 60, 90, 120, 150};
-float BP_PM25[8] = {0, 25, 50, 80, 150, 250, 350, 500};
-
-/* PM 2.5 concentration struct */
-typedef struct
-{
-    float buff_12_h[12];
-    float pm_data_now[NUMBER_SAMPLE_PER_HOUR];
-} pm_2_5_t;
-
-/* CO concentration struct */
-typedef struct
-{
-    float co_data_now[NUMBER_SAMPLE_PER_HOUR];
-} co_t;
-
-/* store data to calculate AQI */
-typedef struct
-{
-    pm_2_5_t valPM25;
-    co_t     valCO;
-    int nodeAddr;
-    int pm25Index;
-    int coIndex;
-} data_of_node_t;
-
-data_of_node_t gBufferNode[MAX_NUMBER_NODE];
-
-typedef struct
-{
-    float co;
-    float pm25;
-} co_pm25_t;
-
-/* Calculate mean of co */
-float mean_of_co(data_of_node_t *data_node)
-{
-    float sum = 0;
-    int i;
-    for(i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
-    {
-        sum += data_node->valCO.co_data_now[i];
-    }
-    return sum/NUMBER_SAMPLE_PER_HOUR;
-}
-
-/* Calculate mean of pm2.5 */
-float mean_of_pm25(data_of_node_t *data_node)
-{
-    float sum = 0;
-    int i;
-    for(i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
-    {
-        sum += data_node->valPM25.pm_data_now[i];
-    }
-    return sum/NUMBER_SAMPLE_PER_HOUR;
-}
-
-co_pm25_t parse_pkg(LoRaMacMessageData_t macMsgData)
-{
-    co_pm25_t var;
-    sscanf(macMsgData.FRMPayload, "%f, %f", &var.co, &var.pm25);
-    return var;
-}
-
-int check_node_addr(int nodeAddr)
-{
-    int i;
-    if(bufferNodeIndex == 0)
-    {
-        return -1;
-    }
-    for(int i = 0; i < bufferNodeIndex; i++)
-    {
-        if(nodeAddr == gBufferNode[i].nodeAddr)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-void store_new_data(data_of_node_t *data_node, float valPm25, float valCo)
-{
-    int i;
-    float meanCo;
-    data_node->valPM25.pm_data_now[data_node->pm25Index] = valPm25;
-    data_node->valCO.co_data_now[data_node->coIndex] = valCo;
-
-    data_node->pm25Index++;
-    data_node->coIndex++;
-    
-    if(data_node->pm25Index == NUMBER_SAMPLE_PER_HOUR)
-    {
-        if(buff12hIndex == 11)
-        {
-            for(i = 0; i < 12; i++)
-            {
-                data_node->valPM25.buff_12_h[i] = data_node->valPM25.buff_12_h[i+1];
-            }
-            data_node->valPM25.buff_12_h[11] = mean_of_pm25(data_node);
-        }
-        else
-        {
-            data_node->valPM25.buff_12_h[buff12hIndex] = mean_of_pm25(data_node);
-            buff12hIndex++;
-        }
-        data_node->pm25Index = 0;
-    }
-    
-    if(data_node->coIndex == NUMBER_SAMPLE_PER_HOUR)
-    {
-        data_node->coIndex = 0;
-    }
-}
-
-float cal_aqi_co(data_of_node_t *data_node)
-{
-    float co_mean;
-    co_mean = mean_of_co(data_node);
-    
-    int i, j;
-    for(j = 0; j < 8; j++)
-    {
-        if(co_mean > BP_CO[j])
-        {
-            i = j;
-        }
-    }
-    
-    float aqi = (( (I[i+1] - I[i]) / (BP_CO[i+1] - BP_CO[i]) ) * (co_mean - BP_CO[i]) + I[i]);
-
-    if(i == 7)
-    {
-        return I[7];
-    } 
-    else
-    {
-        return aqi;
-    }
-}
-
-float cal_aqi_pm25(data_of_node_t *data_node)
-{
-    float weightIndex;
-    float Cmax, Cmin;
-    float nowCast = 0;
-    float sumOfThree = 0;
-    float up = 0, down = 0;
-    
-    if(buff12hIndex != 11)
-    {
-        printf("Can't not calculate AQI of PM25\n");
-        return -1;
-    }
-
-    Cmax = data_node->valPM25.buff_12_h[0];
-    Cmin = data_node->valPM25.buff_12_h[0];
-
-    for(int i = 0; i < 12; i ++)
-    {
-        if(Cmax < data_node->valPM25.buff_12_h[i])
-        {
-            Cmax = data_node->valPM25.buff_12_h[i];
-        }
-        if(Cmin > data_node->valPM25.buff_12_h[i])
-        {
-            Cmin = data_node->valPM25.buff_12_h[i];
-        }
-    }
-    
-    weightIndex = Cmin/Cmax;
-    if(weightIndex <= 0.5)
-    {
-        weightIndex = 0.5;
-        for(int i = 0; i < 12; i++)
-        {
-            /* Calculate nowCast value if weight index =< 0.5 */
-            nowCast += pow(0.5, (i+1))*(data_node->valPM25.buff_12_h[i]);
-        }
-    }
-    else {
-        for(int i = 0; i < 12; i++)
-        {
-            up += pow(weightIndex, i)*(data_node->valPM25.buff_12_h[11-i]);
-            down += pow(weightIndex, i);
-        }
-        /* Calculate nowCast value if weight index > 0.5 */
-        nowCast = up/down;
-    }
-    
-    /* Check if two of three value (C0, C1, C2) is zero . can't calculate AQI */
-    sumOfThree = data_node->valPM25.buff_12_h[0] + data_node->valPM25.buff_12_h[1] + data_node->valPM25.buff_12_h[2];
-
-    if(sumOfThree == data_node->valPM25.buff_12_h[0] || sumOfThree == data_node->valPM25.buff_12_h[1] || sumOfThree == data_node->valPM25.buff_12_h[2])
-    {
-        printf("Can't calculate AQI \n");
-        return -1;
-    }
-
-    int j;
-    for(int i = 0; i < 8; i++)
-    {
-        if( nowCast > BP_PM25[i] )
-        {
-            j = i;
-        }
-    }
-    /* Formula air quality */
-    float aqi = (( (I[j+1] - I[j]) / (BP_PM25[j+1] - BP_PM25[j]) ) * (nowCast - BP_PM25[j]) + I[j]);
-    if( j == 7)
-    {
-        return I[j];
-    }
-    else {
-        return aqi;
-    }
-}
-
-int updata_to_node(LoRaMacMessageData_t macMsgData)
-{
-    co_pm25_t var;
-    int nodeAddr;
-    // Parse data
-    var = parse_pkg(macMsgData);
-    int index;
-
-    nodeAddr = (macMsgData.FHDR.DevAddr) & 0xFF;
-
-    index = check_node_addr(nodeAddr);
-
-    // If this is firt time node send pkg to smgw
-    if(index == -1)
-    {
-        // Check buffer full
-        if(bufferNodeIndex  == MAX_NUMBER_NODE)
-        {
-            printf("Buffer is full, can't receive any node!\n");
-            return -1;
-        }  
-
-        // Initialize new value for new node
-        gBufferNode[bufferNodeIndex].nodeAddr = nodeAddr;
-        gBufferNode[bufferNodeIndex].pm25Index = 0;
-        gBufferNode[bufferNodeIndex].coIndex = 0;
-
-        bufferNodeIndex++;
-        printf("Update to new node!\n");
-        store_new_data(&gBufferNode[bufferNodeIndex], var.pm25, var.co);
-    } else
-    {
-        printf("Update to previous node!\n");
-        store_new_data(&gBufferNode[index], var.pm25, var.co);
-    }
-    return 1;
-    
-}
-/*--------------------------------------------------------------------------------------------------------------------- */
-
-
-
 /* -------------------------------------------------------------------------- */
 /* --- PRIVATE FUNCTIONS DEFINITION ----------------------------------------- */
 LoRaMacSerializerStatus_t LoRaMac_SerializePacket(LoRaMacMessageData_t* mac_msg)
@@ -450,9 +182,14 @@ LoRaMacSerializerStatus_t LoRaMac_SerializePacket(LoRaMacMessageData_t* mac_msg)
         return LORAMAC_SERIALIZER_SUCCESS;
 }
 
-LoRaMacSerializerStatus_t LoRaMac_SetUpACKMessage(LoRaMacMessageData_t *ack_msg, uint32_t dev_addr, uint16_t cnt_reply)
+LoRaMacSerializerStatus_t LoRaMac_SetUpACKMessage
+(
+  LoRaMacMessageData_t *ack_msg,
+  uint32_t dev_addr,
+  uint16_t cnt_reply
+)
 {
-    LoRaMacSerializerStatus_t serialize_ret = LORAMAC_SERIALIZER_ERROR;
+        LoRaMacSerializerStatus_t serialize_ret = LORAMAC_SERIALIZER_ERROR;
     uint8_t cmd_len = 0;
     char * cmd;
 
@@ -524,6 +261,9 @@ LoRaMacParserStatus_t LoRaMac_ParserData( LoRaMacMessageData_t *mac_msg )
 
         return LORAMAC_PARSER_SUCCESS;
 }
+
+
+
 
 static void sig_handler(int sigio) {
     if (sigio == SIGQUIT) {
@@ -1110,30 +850,30 @@ int main(int argc, char **argv)
 
 void thread_up(void)
 {
-    int e = 0;
+        int e = 0;
 
-    struct timespec sleep_time = {0, 3000000}; /* 3 ms */
-    /* local timestamp variables until we get accurate GPS time */
+        struct timespec sleep_time = {0, 3000000}; /* 3 ms */
+        /* local timestamp variables until we get accurate GPS time */
     struct timespec fetch_time;
     char fetch_timestamp[30];
     struct tm * x;
 
-    /* allocate memory for packet fetching and processing */
+        /* allocate memory for packet fetching and processing */
     struct lgw_pkt_rx_s rxpkt[NB_PKT_MAX]; /* array containing inbound packets + metadata */
     struct lgw_pkt_rx_s *p; /* pointer on a RX packet */
     int nb_pkt;
 
-    /* data buffers */
+        /* data buffers */
     uint8_t buff_up[TX_BUFF_SIZE]; /* buffer to compose the upstream packet */
     int buff_index;
 
-    Std_ReturnType ret = STD_NOT_OK;
+        Std_ReturnType ret = STD_NOT_OK;
     uint8_t parsedBuff[40];
 
-    LoRaMacMessageData_t macMsgData = {0};
+        LoRaMacMessageData_t macMsgData = {0};
     LoRaMacMessageData_t ack_msg = {0};
 
-    /* tx parameters */
+        /* tx parameters */
     uint8_t status_var;
 
     char mod[64] = DEFAULT_MODULATION;
@@ -1210,117 +950,166 @@ void thread_up(void)
     txpkt.preamble = preamb;
 
     while ((quit_sig != 1) && (exit_sig != 1))
-    {
-    /* fetch packets */
-    pthread_mutex_lock(&mx_concent);
-    nb_pkt = lgw_receive(NB_PKT_MAX, rxpkt);
-    //printf("Packet Number : %d\r\n", nb_pkt);
-    pthread_mutex_unlock(&mx_concent);
-    if (nb_pkt == LGW_HAL_ERROR) {
-        MSG("ERROR: failed packet fetch, exiting\n");
-        return EXIT_FAILURE;
-    } else if (nb_pkt == 0) {
-        clock_nanosleep(CLOCK_MONOTONIC, 0, &sleep_time, NULL); /* wait a short time if no packets */
-    } else {
-        /* local timestamp generation until we get accurate GPS time */
-        clock_gettime(CLOCK_REALTIME, &fetch_time);
-        x = gmtime(&(fetch_time.tv_sec));
-        sprintf(fetch_timestamp,"%04i-%02i-%02i %02i:%02i:%02i.%03liZ",(x->tm_year)+1900,(x->tm_mon)+1,x->tm_mday,x->tm_hour,x->tm_min,x->tm_sec,(fetch_time.tv_nsec)/1000000); /* ISO 8601 format */
-    }
-
-
-    for(int packet_count = 0; packet_count < nb_pkt; ++packet_count)
-    {
-        p = &rxpkt[packet_count];
-
-        if(p->status != STAT_CRC_OK) break;
-
-        printf("msg is received\n");
-
-        for(uint8_t buf_index = 0; buf_index < p->size; buf_index++)
         {
-            macMsgData.Buffer[buf_index] = p->payload[buf_index];
+                /* fetch packets */
+        pthread_mutex_lock(&mx_concent);
+        nb_pkt = lgw_receive(NB_PKT_MAX, rxpkt);
+                //printf("Packet Number : %d\r\n", nb_pkt);
+        pthread_mutex_unlock(&mx_concent);
+        if (nb_pkt == LGW_HAL_ERROR) {
+            MSG("ERROR: failed packet fetch, exiting\n");
+            return EXIT_FAILURE;
+        } else if (nb_pkt == 0) {
+            clock_nanosleep(CLOCK_MONOTONIC, 0, &sleep_time, NULL); /* wait a short time if no packets */
+        } else {
+            /* local timestamp generation until we get accurate GPS time */
+            clock_gettime(CLOCK_REALTIME, &fetch_time);
+            x = gmtime(&(fetch_time.tv_sec));
+            sprintf(fetch_timestamp,"%04i-%02i-%02i %02i:%02i:%02i.%03liZ",(x->tm_year)+1900,(x->tm_mon)+1,x->tm_mday,x->tm_hour,x->tm_min,x->tm_sec,(fetch_time.tv_nsec)/1000000); /* ISO 8601 format */
         }
 
-        macMsgData.BufSize = p->size;
-        ret = LoRaMac_ParserData(&macMsgData);
-        if(ret == STD_NOT_OK)
-        {
-            printf("Parse Packet Fail\r\n");
-            return ret;
+
+                for(int packet_count = 0; packet_count < nb_pkt; ++packet_count)
+                {
+                        p = &rxpkt[packet_count];
+
+                        if(p->status != STAT_CRC_OK) break;
+
+                        printf("msg is received\n");
+
+                        for(uint8_t buf_index = 0; buf_index < p->size; buf_index++)
+            {
+                macMsgData.Buffer[buf_index] = p->payload[buf_index];
+            }
+
+                        macMsgData.BufSize = p->size;
+                        ret = LoRaMac_ParserData(&macMsgData);
+                if(ret == STD_NOT_OK)
+                {
+                                printf("Parse Packet Fail\r\n");
+                return ret;
+            }
+                        printf("[DEBUG] DevAddr = %u \r\n",macMsgData.FHDR.DevAddr);
+                        if(((macMsgData.FHDR.DevAddr)&0xFFFF0000)!=GW_ADDR)
+            {
+                printf("Wrong GW ADDR \r\n");
+                break;
+            }
+
+                        printf("This msg %u from node %u : %s\r\n", macMsgData.FHDR.FCnt, (macMsgData.FHDR.DevAddr) & 0xFF, macMsgData.FRMPayload);
+                        /* Log Data */
+            /* writing Node Address */
+            fprintf(rxfile,"%u.%u.%u.%u,",(macMsgData.FHDR.DevAddr >> 24) & 0xFF,(macMsgData.FHDR.DevAddr >> 16) & 0xFF,(macMsgData.FHDR.DevAddr >> 8) & 0xFF,(macMsgData.FHDR.DevAddr) & 0xFF);
+            /* writing RX frequency */
+            fprintf(rxfile, "%10u,", p->freq_hz);
+            /* writing payload size */
+            fprintf(rxfile,"%3u,", p->size);
+
+                        /* writing bandwidth */
+            switch(p->bandwidth) {
+                case BW_500KHZ:     fputs("500000,", rxfile); break;
+                case BW_250KHZ:     fputs("250000,", rxfile); break;
+                case BW_125KHZ:     fputs("125000,", rxfile); break;
+                case BW_62K5HZ:     fputs("62500 ,", rxfile); break;
+                case BW_31K2HZ:     fputs("31200 ,", rxfile); break;
+                case BW_15K6HZ:     fputs("15600 ,", rxfile); break;
+                case BW_7K8HZ:      fputs("7800  ,", rxfile); break;
+                case BW_UNDEFINED:  fputs("0     ,", rxfile); break;
+                default:            fputs("-1    ,", rxfile);
+            }
+
+
+                        /* writing datarate */
+            if (p->modulation == MOD_LORA) {
+                switch (p->datarate) {
+                    case DR_LORA_SF7:   fputs("\"SF7\"  ,", rxfile); break;
+                    case DR_LORA_SF8:   fputs("\"SF8\"  ,", rxfile); break;
+                    case DR_LORA_SF9:   fputs("\"SF9\"  ,", rxfile); break;
+                    case DR_LORA_SF10:  fputs("\"SF10\" ,", rxfile); break;
+                    case DR_LORA_SF11:  fputs("\"SF11\" ,", rxfile); break;
+                    case DR_LORA_SF12:  fputs("\"SF12\" ,", rxfile); break;
+                    default:            fputs("\"ERR\"  ,", rxfile);
+                }
+            } else if (p->modulation == MOD_FSK) {
+                fprintf(rxfile, "\"%6u\",", p->datarate);
+            } else {
+                fputs("\"ERR\"   ,", rxfile);
+            }
+
+                        /* writing coderate */
+            switch (p->coderate) {
+                case CR_LORA_4_5:   fputs("\"4/5\",", rxfile); break;
+                case CR_LORA_4_6:   fputs("\"2/3\",", rxfile); break;
+                case CR_LORA_4_7:   fputs("\"4/7\",", rxfile); break;
+                case CR_LORA_4_8:   fputs("\"1/2\",", rxfile); break;
+                case CR_UNDEFINED:  fputs("\"\"   ,", rxfile); break;
+                default:            fputs("\"ERR\",", rxfile);
+            }
+            /* writing packet RSSI */
+            fprintf(rxfile, "%+.0f,", p->rssi);
+            /* writing packet average SNR */
+            fprintf(rxfile, "%+5.1f,", p->snr);
+            /* writing Frame Counter */
+            fprintf(rxfile,"%u,",macMsgData.FHDR.FCnt);
+            /* writing Frame Payload */
+            fprintf(rxfile,"%s",macMsgData.FRMPayload);
+            fputs("\n", rxfile); //end of log file line
+            fflush(rxfile);
+            // delay to send
+            wait_ms(10);
+            /* Setup ACK to send */
+            printf("%u\r\n",macMsgData.FHDR.DevAddr >>24);
+            LoRaMac_SetUpACKMessage(&ack_msg,macMsgData.FHDR.DevAddr,macMsgData.FHDR.FCnt);
+
+                        for(int pkt_index = 0; pkt_index < ack_msg.BufSize; pkt_index++)
+            {
+                txpkt.payload[pkt_index] = ack_msg.Buffer[pkt_index];
+            }
+
+                        printf("%u\r\n",ack_msg.BufSize);
+            txpkt.size = ack_msg.BufSize;
+            /* send packet */
+                wait_ms(50);
+            printf("Sending ACK\r\n");
+
+                        pthread_mutex_lock(&mx_concent);
+            e = lgw_send(txpkt);
+            pthread_mutex_unlock(&mx_concent);
+
+
+                        if (e == LGW_HAL_ERROR)
+            {
+                printf("ERROR\n");
+                return EXIT_FAILURE;
+            }
+            else if (e == LGW_LBT_ISSUE )
+            {
+                printf("Failed: Not allowed (LBT)\n");
+            }
+            else
+            {
+                /* wait for packet to finish sending */
+                do
+                {
+                    wait_ms(5);
+                    pthread_mutex_lock(&mx_concent);
+                    lgw_status(TX_STATUS, &status_var); /* get TX status */
+                    pthread_mutex_unlock(&mx_concent);
+                } while (status_var != TX_FREE);
+                                printf("Send ACK OK\n");
+            }
+
+                        printf("\r\n");
+            /* wait inter-packet delay */
+            wait_ms(delay);
         }
-        printf("[DEBUG] DevAddr = %u \r\n",macMsgData.FHDR.DevAddr);
-        if(((macMsgData.FHDR.DevAddr)&0xFFFF0000)!=GW_ADDR)
-        {
-            printf("Wrong GW ADDR \r\n");
+
+                /* exit loop on user signals */
+        if ((quit_sig == 1) || (exit_sig == 1))
+                {
             break;
         }
-
-        printf("This msg %u from node %u : %s\r\n", macMsgData.FHDR.FCnt, (macMsgData.FHDR.DevAddr) & 0xFF, macMsgData.FRMPayload);
-        /* Log Data */
-
-/*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
-
-        updata_to_node(macMsgData);
-        printf("Data in buffer: co index: %d, pm25 index: %d\n",gBufferNode[0].coIndex, gBufferNode[0].pm25Index);
-
-/*--------------------------------------------------------------------------------------------------------------------- */
-       
-        // delay to send
-        wait_ms(10);
-        /* Setup ACK to send */
-        printf("%u\r\n",macMsgData.FHDR.DevAddr >>24);
-        LoRaMac_SetUpACKMessage(&ack_msg,macMsgData.FHDR.DevAddr,macMsgData.FHDR.FCnt);
-
-                    for(int pkt_index = 0; pkt_index < ack_msg.BufSize; pkt_index++)
-        {
-            txpkt.payload[pkt_index] = ack_msg.Buffer[pkt_index];
         }
-
-                    printf("%u\r\n",ack_msg.BufSize);
-        txpkt.size = ack_msg.BufSize;
-        /* send packet */
-            wait_ms(50);
-        printf("Sending ACK\r\n");
-
-                    pthread_mutex_lock(&mx_concent);
-        e = lgw_send(txpkt);
-        pthread_mutex_unlock(&mx_concent);
-
-
-                    if (e == LGW_HAL_ERROR)
-        {
-            printf("ERROR\n");
-            return EXIT_FAILURE;
-        }
-        else if (e == LGW_LBT_ISSUE )
-        {
-            printf("Failed: Not allowed (LBT)\n");
-        }
-        else
-        {
-            /* wait for packet to finish sending */
-            do
-            {
-                wait_ms(5);
-                pthread_mutex_lock(&mx_concent);
-                lgw_status(TX_STATUS, &status_var); /* get TX status */
-                pthread_mutex_unlock(&mx_concent);
-            } while (status_var != TX_FREE);
-            printf("Send ACK OK\n");
-        }
-
-                    printf("\r\n");
-        /* wait inter-packet delay */
-        wait_ms(delay);
-    }
-
-    /* exit loop on user signals */
-    if ((quit_sig == 1) || (exit_sig == 1))
-            {
-        break;
-    }
-    }
     return EXIT_SUCCESS;
 }
 
