@@ -1,46 +1,133 @@
-/* Includes */
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usart.h"
 #include "rng.h"
 #include "spi.h"
 #include "gpio.h"
+#include "tim.h"
 #include "adc.h"
 
-/* Private includes */
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 #include "app.h"
+#include "sensor.h"
+/* USER CODE END Includes */
 
-/* Private function prototypes */
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+/* USER CODE BEGIN PFP */
 
-uint32_t adcVal;
+/* USER CODE END PFP */
 
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+uint16_t ADCVal_GP2Y;
+uint16_t ADCVal_MQ135;
+
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
   /* Configure the system clock */
   SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_RNG_Init();
   MX_SPI2_Init();
-	MX_ADC_Init();
   MX_USART1_UART_Init();
   MX_LPUART1_UART_Init();
+	
+  MX_ADC_Init();
+  MX_TIM7_Init();
+	HAL_TIM_Base_Start(&htim7);
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
 
   /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
-		//App_Main();
-		HAL_ADC_Start(&hadc);
-		adcVal = HAL_ADC_GetValue(&hadc);
-		HAL_Delay(1000);
-		HAL_ADC_Stop(&hadc);
+    /* USER CODE END WHILE */
+//		App_Main();
+		
+		ADCVal_GP2Y = get_adc_gp2y();
+		HAL_Delay(100);
+		
+		ADCVal_MQ135 = get_adc_mq135();
+		HAL_Delay(100);
+    /* USER CODE BEGIN 3 */
   }
+  /* USER CODE END 3 */
 }
 
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -85,6 +172,10 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
 
  /**
   * @brief  Period elapsed callback in non blocking mode
@@ -136,4 +227,4 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/*****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

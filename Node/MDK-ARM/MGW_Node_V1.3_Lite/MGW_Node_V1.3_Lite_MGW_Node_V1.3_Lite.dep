@@ -1,10 +1,10 @@
 Dependencies for Project 'MGW_Node_V1.3_Lite', Target 'MGW_Node_V1.3_Lite': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
 F (startup_stm32l072xx.s)(0x5F015A12)(--cpu Cortex-M0+ -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32L072xx SETA 1"--list startup_stm32l072xx.lst --xref -o mgw_node_v1.3_lite\startup_stm32l072xx.o --depend mgw_node_v1.3_lite\startup_stm32l072xx.d)
-F (../Src/main.c)(0x629B9216)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\main.o --omf_browse mgw_node_v1.3_lite\main.crf --depend mgw_node_v1.3_lite\main.d)
+F (../Src/main.c)(0x62CEED87)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\main.o --omf_browse mgw_node_v1.3_lite\main.crf --depend mgw_node_v1.3_lite\main.d)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -22,6 +22,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -39,12 +41,15 @@ I (../Inc/usart.h)(0x5F015A0A)
 I (../Inc/rng.h)(0x5F015A0A)
 I (../Inc/spi.h)(0x5F015A0B)
 I (../Inc/gpio.h)(0x5F015A09)
+I (..\User_Code\Sensor\tim.h)(0x62CED5F8)
+I (..\User_Code\Sensor\adc.h)(0x62CEDBE8)
 I (..\User_Code\Apps\app.h)(0x5EF8DDA8)
-F (../Src/gpio.c)(0x5F015A09)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\gpio.o --omf_browse mgw_node_v1.3_lite\gpio.crf --depend mgw_node_v1.3_lite\gpio.d)
+I (..\User_Code\Sensor\sensor.h)(0x62CEEA56)
+F (../Src/gpio.c)(0x5F015A09)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\gpio.o --omf_browse mgw_node_v1.3_lite\gpio.crf --depend mgw_node_v1.3_lite\gpio.d)
 I (../Inc/gpio.h)(0x5F015A09)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -62,6 +67,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -75,11 +82,11 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/usart.c)(0x5F015A0A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\usart.o --omf_browse mgw_node_v1.3_lite\usart.crf --depend mgw_node_v1.3_lite\usart.d)
+F (../Src/usart.c)(0x5F015A0A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\usart.o --omf_browse mgw_node_v1.3_lite\usart.crf --depend mgw_node_v1.3_lite\usart.d)
 I (../Inc/usart.h)(0x5F015A0A)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -97,6 +104,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -110,11 +119,11 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/rng.c)(0x5F015A0A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\rng.o --omf_browse mgw_node_v1.3_lite\rng.crf --depend mgw_node_v1.3_lite\rng.d)
+F (../Src/rng.c)(0x5F015A0A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\rng.o --omf_browse mgw_node_v1.3_lite\rng.crf --depend mgw_node_v1.3_lite\rng.d)
 I (../Inc/rng.h)(0x5F015A0A)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -132,6 +141,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -145,11 +156,11 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/spi.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\spi.o --omf_browse mgw_node_v1.3_lite\spi.crf --depend mgw_node_v1.3_lite\spi.d)
+F (../Src/spi.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\spi.o --omf_browse mgw_node_v1.3_lite\spi.crf --depend mgw_node_v1.3_lite\spi.d)
 I (../Inc/spi.h)(0x5F015A0B)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -167,6 +178,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -180,10 +193,10 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/stm32l0xx_it.c)(0x5F09EA65)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_it.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_it.crf --depend mgw_node_v1.3_lite\stm32l0xx_it.d)
+F (../Src/stm32l0xx_it.c)(0x5F09EA65)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_it.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_it.crf --depend mgw_node_v1.3_lite\stm32l0xx_it.d)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -201,6 +214,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -215,10 +230,10 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
 I (../Inc/stm32l0xx_it.h)(0x5F015A0B)
-F (../Src/stm32l0xx_hal_msp.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_msp.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_msp.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_msp.d)
+F (../Src/stm32l0xx_hal_msp.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_msp.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_msp.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_msp.d)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -236,6 +251,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -249,9 +266,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/stm32l0xx_hal_timebase_tim.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.d)
+F (../Src/stm32l0xx_hal_timebase_tim.c)(0x5F015A0B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_timebase_tim.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -269,6 +286,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -282,9 +301,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_uart.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_uart.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_uart.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_uart.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_uart.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_uart.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -302,6 +321,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -315,9 +336,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_uart_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -335,6 +356,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -348,9 +371,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -368,6 +391,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -381,9 +406,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_i2c.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_i2c.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_i2c.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_i2c.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_i2c.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_i2c.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -401,6 +426,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -414,9 +441,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_i2c_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -434,6 +461,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -447,9 +476,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rcc.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rcc.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rcc.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rcc.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rcc.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rcc.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -467,6 +496,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -480,9 +511,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -500,6 +531,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -513,9 +546,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash_ramfunc.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -533,6 +566,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -546,9 +581,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -566,6 +601,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -579,9 +616,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_flash_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -599,6 +636,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -612,9 +651,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_gpio.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_gpio.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_gpio.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_gpio.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_gpio.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_gpio.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -632,6 +671,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -645,9 +686,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_dma.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_dma.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_dma.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_dma.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_dma.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_dma.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -665,6 +706,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -678,9 +721,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_pwr.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_pwr.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_pwr.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_pwr.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_pwr.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_pwr.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -698,6 +741,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -711,9 +756,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_pwr_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -731,6 +776,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -744,9 +791,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_cortex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_cortex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_cortex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_cortex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_cortex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_cortex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -764,6 +811,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -777,9 +826,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rng.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rng.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rng.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rng.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rng.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_rng.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_rng.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_rng.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -797,6 +846,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -810,9 +861,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_spi.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_spi.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_spi.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_spi.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_spi.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_spi.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -830,6 +881,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -843,9 +896,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_tim.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_tim.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_tim.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_tim.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_tim.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_tim.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -863,6 +916,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -876,9 +931,9 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.d)
+F (../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c)(0x5E5A07EF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_tim_ex.d)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -896,6 +951,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -909,7 +966,42 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (../Src/system_stm32l0xx.c)(0x5E5A0791)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\system_stm32l0xx.o --omf_browse mgw_node_v1.3_lite\system_stm32l0xx.crf --depend mgw_node_v1.3_lite\system_stm32l0xx.d)
+F (..\Drivers\STM32L0xx_HAL_Driver\Src\stm32l0xx_hal_adc.c)(0x6277E5E5)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\stm32l0xx_hal_adc.o --omf_browse mgw_node_v1.3_lite\stm32l0xx_hal_adc.crf --depend mgw_node_v1.3_lite\stm32l0xx_hal_adc.d)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l072xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Include/core_cm0plus.h)(0x5E5A07AA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AE028)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5E5A07EE)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AE028)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
+F (../Src/system_stm32l0xx.c)(0x5E5A0791)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\system_stm32l0xx.o --omf_browse mgw_node_v1.3_lite\system_stm32l0xx.crf --depend mgw_node_v1.3_lite\system_stm32l0xx.d)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l072xx.h)(0x5E5A0791)
 I (../Drivers/CMSIS/Include/core_cm0plus.h)(0x5E5A07AA)
@@ -919,7 +1011,7 @@ I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5E5A07AA)
 I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5E5A07AA)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h)(0x5E5A0791)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5E5A07EE)
@@ -929,6 +1021,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -942,11 +1036,11 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
-F (..\User_Code\Apps\app.c)(0x5F466E01)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\app.o --omf_browse mgw_node_v1.3_lite\app.crf --depend mgw_node_v1.3_lite\app.d)
+F (..\User_Code\Apps\app.c)(0x5F466E01)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\app.o --omf_browse mgw_node_v1.3_lite\app.crf --depend mgw_node_v1.3_lite\app.d)
 I (..\User_Code\Apps\app.h)(0x5EF8DDA8)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -964,6 +1058,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -987,11 +1083,11 @@ I (..\User_Code\Drivers\Devices\Sx127x\sx127x.h)(0x5EF9B850)
 I (..\User_Code\Drivers\Devices\Sx127x\./cfg/sx127x_cfg.h)(0x5EF9B926)
 I (..\User_Code\Drivers\Devices\Sx127x\sx127x_Types.h)(0x5F34CAD2)
 I (../Inc/spi.h)(0x5F015A0B)
-F (..\User_Code\Utilities\Uart_Debug\Uart_Debug.c)(0x5E5C58C6)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\uart_debug.o --omf_browse mgw_node_v1.3_lite\uart_debug.crf --depend mgw_node_v1.3_lite\uart_debug.d)
+F (..\User_Code\Utilities\Uart_Debug\Uart_Debug.c)(0x5E5C58C6)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\uart_debug.o --omf_browse mgw_node_v1.3_lite\uart_debug.crf --depend mgw_node_v1.3_lite\uart_debug.d)
 I (..\User_Code\Utilities\Uart_Debug\Uart_Debug.h)(0x5E5C59D7)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AE02A)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1009,6 +1105,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1025,7 +1123,7 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
 I (..\User_Code\Utilities\Uart_Debug\./cfg/Uart_Debug_Cfg.h)(0x5E5EEAA3)
 I (../Inc/usart.h)(0x5F015A0A)
 I (../Inc/main.h)(0x5F015A0C)
-F (..\User_Code\Drivers\Devices\Sx127x\sx127x.c)(0x5EF9B90F)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\sx127x.o --omf_browse mgw_node_v1.3_lite\sx127x.crf --depend mgw_node_v1.3_lite\sx127x.d)
+F (..\User_Code\Drivers\Devices\Sx127x\sx127x.c)(0x5EF9B90F)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\sx127x.o --omf_browse mgw_node_v1.3_lite\sx127x.crf --depend mgw_node_v1.3_lite\sx127x.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AE02A)
 I (..\User_Code\Drivers\Devices\Sx127x\sx127x.h)(0x5EF9B850)
 I (..\User_Code\Drivers\Devices\Sx127x\./cfg/sx127x_cfg.h)(0x5EF9B926)
@@ -1033,7 +1131,7 @@ I (..\User_Code\Drivers\Devices\Sx127x\sx127x_Types.h)(0x5F34CAD2)
 I (../Inc/spi.h)(0x5F015A0B)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1051,6 +1149,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1065,11 +1165,11 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
 I (..\User_Code\Base\Std_Types.h)(0x5EF90DB6)
-F (..\User_Code\Drivers\Devices\Sx127x\cfg\sx127x_cfg.c)(0x5EE5C9AE)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\sx127x_cfg.o --omf_browse mgw_node_v1.3_lite\sx127x_cfg.crf --depend mgw_node_v1.3_lite\sx127x_cfg.d)
+F (..\User_Code\Drivers\Devices\Sx127x\cfg\sx127x_cfg.c)(0x5EE5C9AE)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\sx127x_cfg.o --omf_browse mgw_node_v1.3_lite\sx127x_cfg.crf --depend mgw_node_v1.3_lite\sx127x_cfg.d)
 I (../Inc/spi.h)(0x5F015A0B)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1087,6 +1187,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1103,14 +1205,14 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
 I (..\User_Code\Drivers\Devices\Sx127x\./cfg/sx127x_cfg.h)(0x5EF9B926)
 I (..\User_Code\Drivers\Devices\Sx127x\sx127x_Types.h)(0x5F34CAD2)
 I (..\User_Code\Base\Std_Types.h)(0x5EF90DB6)
-F (..\User_Code\Services\LoRa\LoRa_Services.c)(0x5F466E20)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\lora_services.o --omf_browse mgw_node_v1.3_lite\lora_services.crf --depend mgw_node_v1.3_lite\lora_services.d)
+F (..\User_Code\Services\LoRa\LoRa_Services.c)(0x5F466E20)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\lora_services.o --omf_browse mgw_node_v1.3_lite\lora_services.crf --depend mgw_node_v1.3_lite\lora_services.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AE02A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AE02A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AE028)
 I (..\User_Code\Apps\app.h)(0x5EF8DDA8)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1128,6 +1230,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1153,13 +1257,13 @@ I (../Inc/usart.h)(0x5F015A0A)
 I (..\User_Code\Services\LoRaMAC\LoRaMac_Node.h)(0x5E91A468)
 I (..\User_Code\Services\LoRaMAC\LoRaMac_Node_Types.h)(0x5E91857A)
 I (..\User_Code\Services\LoRaMAC\./cfg/LoRaMac_Node_Cfg.h)(0x5F245C28)
-F (..\User_Code\Services\LoRaMAC\LoRaMac_Node.c)(0x5EDFEA48)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\loramac_node.o --omf_browse mgw_node_v1.3_lite\loramac_node.crf --depend mgw_node_v1.3_lite\loramac_node.d)
+F (..\User_Code\Services\LoRaMAC\LoRaMac_Node.c)(0x62CEE753)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\loramac_node.o --omf_browse mgw_node_v1.3_lite\loramac_node.crf --depend mgw_node_v1.3_lite\loramac_node.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AE028)
 I (..\User_Code\Services\LoRaMAC\LoRaMac_Node.h)(0x5E91A468)
 I (..\User_Code\Base\Std_Types.h)(0x5EF90DB6)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1177,6 +1281,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1196,7 +1302,7 @@ I (..\User_Code\Drivers\Devices\Sx127x\./cfg/sx127x_cfg.h)(0x5EF9B926)
 I (..\User_Code\Drivers\Devices\Sx127x\sx127x_Types.h)(0x5F34CAD2)
 I (../Inc/spi.h)(0x5F015A0B)
 I (..\User_Code\Services\LoRaMAC\./cfg/LoRaMac_Node_Cfg.h)(0x5F245C28)
-F (..\User_Code\Services\LoRaMAC\cfg\LoRaMac_Node_Cfg.c)(0x5DA587F2)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\loramac_node_cfg.o --omf_browse mgw_node_v1.3_lite\loramac_node_cfg.crf --depend mgw_node_v1.3_lite\loramac_node_cfg.d)
+F (..\User_Code\Services\LoRaMAC\cfg\LoRaMac_Node_Cfg.c)(0x5DA587F2)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\loramac_node_cfg.o --omf_browse mgw_node_v1.3_lite\loramac_node_cfg.crf --depend mgw_node_v1.3_lite\loramac_node_cfg.d)
 I (..\User_Code\Services\LoRaMAC\./cfg/LoRaMac_Node_Cfg.h)(0x5F245C28)
 I (..\User_Code\Services\LoRaMAC\LoRaMac_Node_Types.h)(0x5E91857A)
 I (..\User_Code\Drivers\Devices\Sx127x\sx127x.h)(0x5EF9B850)
@@ -1205,7 +1311,7 @@ I (..\User_Code\Drivers\Devices\Sx127x\sx127x_Types.h)(0x5F34CAD2)
 I (../Inc/spi.h)(0x5F015A0B)
 I (../Inc/main.h)(0x5F015A0C)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
-I (../Inc/stm32l0xx_hal_conf.h)(0x5F015A0C)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
 I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
@@ -1223,6 +1329,8 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
@@ -1237,3 +1345,116 @@ I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
 I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
 I (..\User_Code\Base\Std_Types.h)(0x5EF90DB6)
+F (..\User_Code\Sensor\adc.c)(0x62CEDBE8)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\adc.o --omf_browse mgw_node_v1.3_lite\adc.crf --depend mgw_node_v1.3_lite\adc.d)
+I (..\User_Code\Sensor\adc.h)(0x62CEDBE8)
+I (../Inc/main.h)(0x5F015A0C)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l072xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Include/core_cm0plus.h)(0x5E5A07AA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AE028)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5E5A07EE)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AE028)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
+F (..\User_Code\Sensor\tim.c)(0x62CED5F8)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\tim.o --omf_browse mgw_node_v1.3_lite\tim.crf --depend mgw_node_v1.3_lite\tim.d)
+I (..\User_Code\Sensor\tim.h)(0x62CED5F8)
+I (../Inc/main.h)(0x5F015A0C)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l072xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Include/core_cm0plus.h)(0x5E5A07AA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AE028)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5E5A07EE)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AE028)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
+F (..\User_Code\Sensor\sensor.c)(0x62CEED89)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc -I ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32L0xx/Include -I ../Drivers/CMSIS/Include -I ..\User_Code\Apps -I ..\User_Code\Base -I ..\User_Code\Utilities\Uart_Debug -I ..\User_Code\Drivers\Devices\Sx127x -I ..\User_Code\Drivers\Devices\InterBoard -I ..\User_Code\Services\LoRaMAC -I ..\User_Code\Services\LoRa -I ..\User_Code\Sensor-I.\RTE\_MGW_Node_V1.3_Lite-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"C:\Users\Thinkpad  E15\AppData\Local\Arm\Packs\Keil\STM32L0xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32L0xx\Include"-D__UVISION_VERSION="529" -D_RTE_ -DSTM32L072xx -DUSE_HAL_DRIVER -DSTM32L072xx-o mgw_node_v1.3_lite\sensor.o --omf_browse mgw_node_v1.3_lite\sensor.crf --depend mgw_node_v1.3_lite\sensor.d)
+I (..\User_Code\Sensor\sensor.h)(0x62CEEA56)
+I (../Inc/main.h)(0x5F015A0C)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h)(0x5E5A07EE)
+I (../Inc/stm32l0xx_hal_conf.h)(0x62CEE685)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h)(0x5E5A07EE)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l072xx.h)(0x5E5A0791)
+I (../Drivers/CMSIS/Include/core_cm0plus.h)(0x5E5A07AA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AE028)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5E5A07AA)
+I (../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h)(0x5E5A0791)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5E5A07EE)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AE028)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h)(0x6277E5E5)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h)(0x5E5A07EE)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h)(0x5E5A07EF)
+I (../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h)(0x5E5A07EF)
+I (..\User_Code\Sensor\adc.h)(0x62CEDBE8)
+I (..\User_Code\Sensor\tim.h)(0x62CED5F8)
