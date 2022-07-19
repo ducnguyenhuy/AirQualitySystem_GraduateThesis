@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L072xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;    ../Drivers/STM32L0xx_HAL_Driver/Inc;    ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy;    ../Drivers/CMSIS/Device/ST/STM32L0xx/Include;    ../Drivers/CMSIS/Include;    ..\User_Code\Apps;    ..\User_Code\Base;    ..\User_Code\Utilities\Uart_Debug;    ..\User_Code\Drivers\Devices\Sx127x;    ..\User_Code\Drivers\Devices\InterBoard;    ..\User_Code\Services\LoRaMAC;    ..\User_Code\Services\LoRa</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32L0xx_HAL_Driver/Inc;../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32L0xx/Include;../Drivers/CMSIS/Include;..\User_Code\Apps;..\User_Code\Base;..\User_Code\Utilities\Uart_Debug;..\User_Code\Drivers\Devices\Sx127x;..\User_Code\Drivers\Devices\InterBoard;..\User_Code\Services\LoRaMAC;..\User_Code\Services\LoRa;..\User_Code\Sensor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -431,6 +431,11 @@
               <FileName>stm32l0xx_hal_timebase_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32l0xx_hal_timebase_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\rtc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -532,6 +537,21 @@
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32l0xx_hal_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L0xx_HAL_Driver\Src\stm32l0xx_hal_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l0xx_hal_rtc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L0xx_HAL_Driver\Src\stm32l0xx_hal_rtc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l0xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32L0xx_HAL_Driver\Src\stm32l0xx_hal_adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -601,6 +621,26 @@
               <FileName>LoRaMac_Node_Cfg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User_Code\Services\LoRaMAC\cfg\LoRaMac_Node_Cfg.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User_Code/Sensor</GroupName>
+          <Files>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Code\Sensor\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Code\Sensor\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Code\Sensor\tim.c</FilePath>
             </File>
           </Files>
         </Group>

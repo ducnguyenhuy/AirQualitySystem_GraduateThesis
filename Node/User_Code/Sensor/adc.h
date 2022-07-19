@@ -25,6 +25,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -36,7 +37,6 @@ extern ADC_HandleTypeDef hadc;
 /* USER CODE END Private defines */
 
 void MX_ADC_Init(void);
-
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */

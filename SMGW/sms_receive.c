@@ -7,9 +7,14 @@
 #include <string.h>
 #include <json-c/json.h>
 #include <pthread.h>
+#include <time.h>
 
 #define PATH_TO_PHONE_NODE          "/tmp/phone_vs_node.json"
 #define PATH_TO_DATA_NODE           "/tmp/aqi_and_concentration.json"
+
+#define HOUR_TO_SEND            22
+#define MINUTE_TO_SEND          15
+
 
 #define DEVICE "/dev/ttyUSB2"
 
@@ -23,7 +28,7 @@ typedef struct
 {
     /* data */
     int addr;
-    float aqi;
+    int aqi;
     float pm2_5;
     float co;
 } data_of_node_t;
@@ -199,7 +204,7 @@ data_of_node_t get_data_by_phone_num(char *phoneNum)
     int checkFlag = 0;
 
     /* Get list of phone number and address of the node */
-    json_object *root = json_object_from_file("/tmp/phone_vs_node.json");
+    json_object *root = json_object_from_file(PATH_TO_PHONE_NODE);
     json_object *phone_and_node;
     json_object_object_get_ex(root, "phone_and_node_addr", &phone_and_node);
 
@@ -319,9 +324,111 @@ void *read_msg(void *arg)
     }
 }
 
+/* Thread send daily sms */
+void *send_daily(void *arg)
+{
+    int lenPair, lenNum, i, j;
+    data_of_node_t data;
+    char textToSend[300];
+    int secSleep;
+    time_t now, timeToSendSms;
+    struct tm timeToSend;
+
+    while(1)
+    {
+        // Get current time (now)
+        now = time(NULL);
+        
+        // Copy current date to a `threepm`, and set time
+        memcpy(&timeToSend, gmtime(&now), sizeof(struct tm));
+        
+        timeToSend.tm_hour = HOUR_TO_SEND;
+        timeToSend.tm_min = MINUTE_TO_SEND;
+        timeToSend.tm_sec = 0;
+
+	    secSleep =(difftime(mktime(&timeToSend), now));
+
+	    if(secSleep < 0)
+	    {
+	    	secSleep = 86400 + secSleep;
+	    }
+
+        sleep(secSleep);
+
+        /* Get list of phone number and address of the node */
+        json_object *root = json_object_from_file(PATH_TO_PHONE_NODE);
+        json_object *phone_and_node;
+        json_object_object_get_ex(root, "phone_and_node_addr", &phone_and_node);
+
+        lenPair = json_object_array_length(phone_and_node);
+
+        json_object *tmp, *node_addr, *num_arr, *num, *phone_arr;
+        data_of_node_t parseDataFromAddr;
+
+        for (i = 0; i < lenPair; i++)
+        {
+            tmp = json_object_array_get_idx(phone_and_node, i);
+
+            /* Get node address */
+            json_object_object_get_ex(tmp, "node_addr", &node_addr);
+            parseDataFromAddr = parse_data_from_json_file(PATH_TO_DATA_NODE, json_object_get_int(node_addr));
+
+            /* Compare value and send to user */ 
+            // if(parseDataFromAddr.aqi <= 50)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí tốt, không ảnh hưởng tới sức khỏe.", parseDataFromAddr.aqi);
+            // } 
+            // else if(parseDataFromAddr.aqi > 50 && parseDataFromAddr.aqi <= 100)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí bình thường. Tuy nhiên, đối với những người nhạy cảm có thể chịu những tác động nhất định tới sức khỏe.", parseDataFromAddr.aqi);
+            // }
+            // else if(parseDataFromAddr.aqi > 100 && parseDataFromAddr.aqi <= 150)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí kém. Những người nhạy cảm gặp phải các vấn đề về sức khỏe, những người bình thường ít ảnh hưởng.", parseDataFromAddr.aqi);
+            // }
+            // else if(parseDataFromAddr.aqi > 150 && parseDataFromAddr.aqi <= 200)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí xấu. Những người bình thường bắt đầu có các ảnh hưởng tới sức khỏe, nhóm người nhạy cảm có thể gặp những vấn đề sức khỏe nghiêm trọng hơn.", parseDataFromAddr.aqi);
+            // }
+            // else if(parseDataFromAddr.aqi > 200 && parseDataFromAddr.aqi <= 300)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí rất xấu. Cảnh báo hưởng tới sức khỏe: mọi người bị ảnh hưởng tới sức khỏe nghiêm trọng hơn.", parseDataFromAddr.aqi);
+            // }
+            // else if(parseDataFromAddr.aqi > 300 && parseDataFromAddr.aqi <= 500)
+            // {
+            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí nguy hại. Cảnh báo khẩn cấp về sức khỏe: toàn bộ dân số bị ảnh hưởng tới sức khỏe tới mức nghiêm trọng.", parseDataFromAddr.aqi);
+            // }
+            
+
+            sprintf(textToSend, "Chi so AQI la: %d.", parseDataFromAddr.aqi);
+
+            /* Get phone number array of node i*/
+            json_object_object_get_ex(tmp, "phone", &phone_arr);
+
+            lenNum = json_object_array_length(phone_arr);
+            for (j = 0; j < lenNum; j++)
+            {
+                /* Number j*/
+                num_arr = json_object_array_get_idx(phone_arr, j);
+                json_object_object_get_ex(num_arr, "num", &num);
+                printf("TEXT TO SENDDDDDDDDDDDDDDDDDDDDD: %s\n", textToSend);
+                send_sms(textToSend, json_object_get_string(num));
+            }
+            
+        }   
+    }
+}
+
+/* Thread update file phone_vs_node.*/
+void *update_file_phone_vs_node(void *arg)
+{
+
+}
+
 int main()
 {
     pthread_t thread_response_usr_id;
+    pthread_t thread_send_daily;
 
     Std_ReturnType ret = 0;
     SerialPort_TermiosConfigType config =
@@ -335,10 +442,11 @@ int main()
 
     /* Setting UART port */
     SerialPort_ConfigureTermios(&config);
-
-    pthread_create(&thread_response_usr_id, NULL, read_msg, NULL);
-    
-    pthread_join(thread_response_usr_id, NULL);
+    // pthread_create(&thread_response_usr_id, NULL, read_msg, NULL);
+    pthread_create(&thread_send_daily, NULL, send_daily, NULL);
+       
+    // pthread_join(thread_response_usr_id, NULL);
+    pthread_join(thread_send_daily, NULL);
 
     return 0;
 }

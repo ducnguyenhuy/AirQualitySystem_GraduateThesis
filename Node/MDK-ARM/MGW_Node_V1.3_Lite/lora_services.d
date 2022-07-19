@@ -24,6 +24,8 @@ mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0x
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h
+mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h
+mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h
@@ -32,6 +34,8 @@ mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0x
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h
+mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc.h
+mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc_ex.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h
 mgw_node_v1.3_lite\lora_services.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h
@@ -51,3 +55,6 @@ mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Services\LoRaMAC\LoRaMac_Node_T
 mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Services\LoRaMAC\./cfg/LoRaMac_Node_Cfg.h
 mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Services\LoRaMAC\LoRaMac_Node_Types.h
 mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Apps\app.h
+mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Sensor\sensor.h
+mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Sensor\adc.h
+mgw_node_v1.3_lite\lora_services.o: ..\User_Code\Sensor\tim.h

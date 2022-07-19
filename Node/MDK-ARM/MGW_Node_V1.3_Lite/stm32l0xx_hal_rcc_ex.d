@@ -19,6 +19,8 @@ mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/s
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h
+mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h
+mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h
@@ -27,6 +29,8 @@ mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/s
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h
+mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc.h
+mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc_ex.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h
 mgw_node_v1.3_lite\stm32l0xx_hal_rcc_ex.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h
