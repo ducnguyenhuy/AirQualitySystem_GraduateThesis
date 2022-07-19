@@ -30,6 +30,8 @@ mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h
+mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc.h
+mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc_ex.h
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h
@@ -37,9 +39,13 @@ mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uar
 mgw_node_v1.3_lite\main.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h
 mgw_node_v1.3_lite\main.o: ../Inc/usart.h
 mgw_node_v1.3_lite\main.o: ../Inc/rng.h
+mgw_node_v1.3_lite\main.o: ../Inc/rtc.h
 mgw_node_v1.3_lite\main.o: ../Inc/spi.h
 mgw_node_v1.3_lite\main.o: ../Inc/gpio.h
 mgw_node_v1.3_lite\main.o: ..\User_Code\Sensor\tim.h
 mgw_node_v1.3_lite\main.o: ..\User_Code\Sensor\adc.h
+mgw_node_v1.3_lite\main.o: ..\User_Code\Utilities\Uart_Debug\Uart_Debug.h
+mgw_node_v1.3_lite\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+mgw_node_v1.3_lite\main.o: ..\User_Code\Utilities\Uart_Debug\./cfg/Uart_Debug_Cfg.h
 mgw_node_v1.3_lite\main.o: ..\User_Code\Apps\app.h
 mgw_node_v1.3_lite\main.o: ..\User_Code\Sensor\sensor.h

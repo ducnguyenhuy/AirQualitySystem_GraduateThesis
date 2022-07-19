@@ -10,6 +10,12 @@
 #include "LoRaMac_Node.h"
 #include "app.h"
 
+#include "sensor.h"
+
+/* global variable */
+extern uint32_t gp2yAdcValue;
+extern uint32_t mq135AdcValue;
+
 #define EEPROM_MSB_ADDR 0x08080000
 
 //#define USING_868
@@ -477,8 +483,16 @@ static void LoRa_MainProcess(void)
 //				}
 //				DEBUG_USER("\r\n");
 				
+				//========================================= Code by DucNH =======================================
+				char cmd_send[50];
+				
+				
+			
+				
+				sprintf(cmd_send, "%d, %d\r\n", gp2yAdcValue, mq135AdcValue);
+				
 				detector_board.dataLen = 45;
-				memcpy(tx_buffer, "*yyyymmddhhmmss,aaa,bbbbbbbbb,c,eee,ffffffff#\r\n", detector_board.dataLen);
+				memcpy(tx_buffer, cmd_send, detector_board.dataLen);
 				DEBUG_USER("%s\r\n",tx_buffer);
 				/* Get Counter from Flash */
 				cur_fcnt = flash_read(EEPROM_MSB_ADDR);
@@ -509,7 +523,8 @@ static void LoRa_MainProcess(void)
 					retry = 1;
 					DEBUG_USER("TxFail\r\n");
 				}
-				
+				// finally enter the standby mode
+				HAL_PWR_EnterSTANDBYMode();
 				break;
 			}
 			case LoRaSV_STATE_RX:

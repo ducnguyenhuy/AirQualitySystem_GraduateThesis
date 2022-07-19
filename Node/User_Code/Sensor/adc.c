@@ -19,7 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc.h"
-
+#include "sensor.h"
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -40,7 +40,7 @@ void MX_ADC_Init(void)
   hadc.Init.SamplingTime = ADC_SAMPLETIME_160CYCLES_5;
   hadc.Init.ScanConvMode = ADC_SCAN_DIRECTION_FORWARD;
   hadc.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc.Init.ContinuousConvMode = ENABLE;
+	hadc.Init.ContinuousConvMode = DISABLE;
   hadc.Init.DiscontinuousConvMode = DISABLE;
   hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc.Init.ExternalTrigConv = ADC_SOFTWARE_START;
@@ -54,45 +54,6 @@ void MX_ADC_Init(void)
   {
     Error_Handler();
   }
-  /** Configure for the selected ADC regular channel to be converted. 
-  */
-//  sConfig.Channel = ADC_CHANNEL_1;
-//  sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
-//  if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  /** Configure for the selected ADC regular channel to be converted. 
-//  */
-//  sConfig.Channel = ADC_CHANNEL_10;
-//  if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-
-}
-
-void ADC_Select_MQ135 (void)
-{
-		ADC_ChannelConfTypeDef sConfig = {0};
-			/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-			*/
-		sConfig.Channel = ADC_CHANNEL_1;
-		sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
-		if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-		{
-			Error_Handler();
-		}
-}
-
-void ADC_Select_GP2Y (void)
-{
-		ADC_ChannelConfTypeDef sConfig = {0};
-		sConfig.Channel = ADC_CHANNEL_10;
-		if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-		{
-			Error_Handler();
-		}
 }
 
 

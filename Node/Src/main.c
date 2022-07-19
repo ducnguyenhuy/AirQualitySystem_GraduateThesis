@@ -22,11 +22,13 @@
 #include "main.h"
 #include "usart.h"
 #include "rng.h"
+#include "rtc.h"
 #include "spi.h"
 #include "gpio.h"
 #include "tim.h"
 #include "adc.h"
 
+#include "Uart_Debug.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app.h"
@@ -61,10 +63,10 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint16_t ADCVal_GP2Y;
-uint16_t ADCVal_MQ135;
+uint32_t gp2yAdcValue;
+uint32_t mq135AdcValue;
 
-
+char *str;
 /* USER CODE END 0 */
 
 /**
@@ -98,13 +100,58 @@ int main(void)
   MX_RNG_Init();
   MX_SPI2_Init();
   MX_USART1_UART_Init();
-  MX_LPUART1_UART_Init();
+  MX_RTC_Init();
 	
-  MX_ADC_Init();
+	MX_ADC_Init();
   MX_TIM7_Init();
 	HAL_TIM_Base_Start(&htim7);
+	
+	gp2yAdcValue= gp2y_adc_measure();  
+	mq135AdcValue = mq135_adc_measure();
+	
+	
+	
   /* USER CODE BEGIN 2 */
+	//=================================================================
+	/* Clear the WU FLAG */
+	__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+		
+	// clear the RTC WAKEUP flag
+	__HAL_RTC_WAKEUPTIMER_CLEAR_FLAG(&hrtc, RTC_FLAG_WUTF);
+	
+	/* Check if the SB flag is set */
+	if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
+	{
+		// clear the flag
+		__HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
+		
+		
+		// display the string
+		DEBUG("Wakeup from the STANDBY MODE \n");
+		
+		// disable the WAKEUP PIN
+		HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
+		
+		// deactive the RTC wakeup
+		HAL_RTCEx_DeactivateWakeUpTimer(&hrtc);
+	}
+	
+	// clear the WAKEUP flag
+	DEBUG("Prepare to enter the STANDBY MODE \n");
+	
+	// enable WAKEUP PIN
+	HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
+	
+	/* Enable the RTC WakeUp */
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0x2D2A, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+	
+	// one last string to be sure
+	DEBUG("STANDBY MODE is ON\n");
 
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,14 +159,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-//		App_Main();
-		
-		ADCVal_GP2Y = get_adc_gp2y();
-		HAL_Delay(100);
-		
-		ADCVal_MQ135 = get_adc_mq135();
-		HAL_Delay(100);
+
     /* USER CODE BEGIN 3 */
+		
+		App_Main();
   }
   /* USER CODE END 3 */
 }
@@ -139,8 +182,9 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLLMUL_8;
@@ -163,9 +207,10 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_LPUART1
-                              |RCC_PERIPHCLK_USB;
+                              |RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USB;
   PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.Lpuart1ClockSelection = RCC_LPUART1CLKSOURCE_PCLK1;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {

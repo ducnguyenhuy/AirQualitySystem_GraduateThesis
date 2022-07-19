@@ -5,6 +5,5 @@
 
 void delay_us (uint16_t us);
 
-uint16_t get_adc_mq135(void);
-
-uint16_t get_adc_gp2y(void);
+uint32_t gp2y_adc_measure(void);
+uint32_t mq135_adc_measure(void);
