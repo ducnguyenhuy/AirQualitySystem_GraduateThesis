@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,10 +22,14 @@
 #define SEND_OK         0
 #define SEND_FAILED     1
 
+#define PATH_TO_FILE_PHONE_VS_NODE  "/tmp/phone_vs_node.json"
+
 int gSendIpStatus = SEND_FAILED;
 
 char *gIpAddr = NULL;
 int gPort = 7000;
+
+char gLink[100];
 
 char *get_ip(void)
 {
@@ -54,8 +57,6 @@ char *get_ip(void)
                 printf("getnameinfo() failed: %s\n", gai_strerror(s));
                 exit(EXIT_FAILURE);
             }
-            // printf("\tInterface : <%s>\n",ifa->ifa_name );
-            // printf("\t  Address : <%s>\n", host);
             if(host[0] == '1')
             {
                 freeifaddrs(ifaddr);
@@ -68,8 +69,6 @@ char *get_ip(void)
                 printf("getnameinfo() failed: %s\n", gai_strerror(s));
                 exit(EXIT_FAILURE);
             }
-            // printf("\tInterface : <%s>\n",ifa->ifa_name );
-            // printf("\t  Address : <%s>\n", host);
             if(host[0] == '1')
             {
                 freeifaddrs(ifaddr);
@@ -136,7 +135,7 @@ void *sock_send_ip(void *arg)
 /* Receive link to wget new file json */
 void *sock_receive_link(void *arg)
 {
-
+    char cmd[100];
     int serverSocket = -1;
     int newSocket = -1;
     struct sockaddr_in server_addr;
@@ -158,17 +157,32 @@ void *sock_receive_link(void *arg)
     while(1)
     {
         newSocket = accept(serverSocket, (struct sockaddr *)NULL, NULL);
-
         readValue = read(newSocket, buffer, 1024);
+
         if(readValue)
         {
-            printf("%s\n", buffer);
-
             // if send ip failed
             if(!strcmp(buffer, gIpAddr))
             {
-                printf("Received ACK!\n");
+                printf("Received ACK: %s\n", buffer);
                 gSendIpStatus = SEND_OK;
+            }
+
+            if(!strncmp(buffer, "http", 4))
+            {
+                sprintf(gLink, "%s", buffer);
+                printf("Received link: %s\n", gLink);
+                // delete if file phone_vs_node.json exist
+                if(!access(PATH_TO_FILE_PHONE_VS_NODE, F_OK))
+                {
+                    sprintf(cmd, "rm -rf %s", PATH_TO_FILE_PHONE_VS_NODE);
+                    system(cmd);
+                    printf("Delete old file phone_vs_node.json!\n");
+                }
+
+                sprintf(cmd, "wget -O %s -T 120 %s", PATH_TO_FILE_PHONE_VS_NODE, gLink);
+                system(cmd);
+                printf("Download file phone_vs_node.json from server!\n");
             }
         }
     }
