@@ -10,6 +10,11 @@
 #include <net/if.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/inotify.h>
+#include <limits.h>
+
+#define FLIE_LINK   "./file_store_link.txt"
+#define BUF_LEN (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
 #define PORT_NUM            7000
 #define SERVER_IP           "192.168.168.108"
@@ -52,6 +57,36 @@ void *sock_receive_ip(void *arg)
             printf("ipReceived: %s\n", ipReceived);
             flag_receive_ip = RECEIVE_IP;
         }
+
+        if(flag_receive_ip == RECEIVE_IP)
+        {
+            char cmd[100];
+            int clientSocket;
+            struct sockaddr_in serverAddr;
+            socklen_t addr_size;
+
+            clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+            serverAddr.sin_family = AF_INET;
+            serverAddr.sin_port = htons(7001);
+            serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
+            memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+            addr_size = sizeof(serverAddr);
+
+            if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
+            {
+                printf("Received IP, send back ACK!\n");
+                sprintf(cmd, "%s", ipReceived);
+                write(clientSocket, cmd, strlen(cmd));
+                flag_receive_ip = NOT_RECEIVE_IP;
+
+                clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+                serverAddr.sin_family = AF_INET;
+                serverAddr.sin_port = htons(7001);
+                serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
+                memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+                addr_size = sizeof(serverAddr);
+            }
+        }
     }
     
 }
@@ -79,39 +114,51 @@ void *sock_send_link(void *arg)
 
     while(1)
     {
-        if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
-        {
-            if(flag_receive_ip == RECEIVE_IP)
-            {
-                printf("Received IP, send back ACK!\n");
-                sprintf(cmd, "%s", ipReceived);
-                write(clientSocket, cmd, strlen(cmd));
-                flag_receive_ip = NOT_RECEIVE_IP;
+        int inotifyFd, wd, j;
+        char buf[BUF_LEN];
+        ssize_t numRead;
+        char *p;
+        struct inotify_event *event;
+        FILE *f_link;
 
-                clientSocket = socket(PF_INET, SOCK_STREAM, 0);
-                serverAddr.sin_family = AF_INET;
-                serverAddr.sin_port = htons(7001);
-                serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
-                memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
-                addr_size = sizeof(serverAddr);
-            } else
+        /* Create inotify instance */
+        inotifyFd = inotify_init();
+        if (inotifyFd == -1)
+        {
+            printf("inotify_init!\n");
+        }
+        
+        wd = inotify_add_watch(inotifyFd, FLIE_LINK, IN_CLOSE_WRITE);
+        if (wd == -1)
+        {
+            printf("inotify_add_watch error!\n");
+        }
+        printf("Start watching %s using\n", FLIE_LINK);
+
+        f_link = fopen(FLIE_LINK, "r");
+
+        for (;;)
+        { /* Read events forever */
+            numRead = read(inotifyFd, buf, BUF_LEN);
+            if (numRead == 0)
+                printf("read() from inotify fd returned 0!");
+            if (numRead == -1)
+                printf("read");
+            if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
             {
-                
-                char IPbuffer[60] = "http://10.2.204.139:9000/phone_vs_node.json";
+                char IPbuffer[100];
+                fgets(IPbuffer, 100, f_link);
+
                 sprintf(cmd, "%s", IPbuffer);
                 write(clientSocket, cmd, strlen(cmd));
-
+                printf("Sent: %s\n", cmd);
                 clientSocket = socket(PF_INET, SOCK_STREAM, 0);
                 serverAddr.sin_family = AF_INET;
                 serverAddr.sin_port = htons(7001);
                 serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
                 memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
                 addr_size = sizeof(serverAddr);
-
             }
-            
-            printf("Go to sleep!\n");
-            sleep(1);
         }
     }
 
@@ -123,8 +170,7 @@ int main()
     pthread_t thread_receive_ip;
     pthread_t thread_send_ip;
 
-    printf("Start sending IP address!\n");
-    printf("Start sending link to update list user!\n");
+    printf("Start running server on Laptop!\n");
 
     pthread_create(&thread_receive_ip, NULL, sock_receive_ip, NULL);
     pthread_create(&thread_send_ip, NULL, sock_send_link, NULL);
