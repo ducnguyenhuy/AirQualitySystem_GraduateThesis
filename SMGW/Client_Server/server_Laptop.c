@@ -12,12 +12,17 @@
 #include <pthread.h>
 #include <sys/inotify.h>
 #include <limits.h>
+#include <sys/wait.h>
 
-#define FLIE_LINK       "./file_store_link.txt"
-#define FILE_TO_SEND    "./phone_vs_node.json"
+
+#define FLIE_LINK               "./file_store_link.txt"
+#define FILE_TO_SEND            "./phone_vs_node.json"
+#define PATH_TO_FILE_AQI_CON    "./AQI_and_Concentration.json"
+
 #define BUF_LEN          (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
 #define PORT_NUM            7000
+#define PORT_AQI_CON        7002
 #define SERVER_IP           "192.168.168.108"
 
 #define RECEIVE_IP          0
@@ -179,19 +184,84 @@ void *sock_send_file_user(void *arg)
 }
 }
 
+int write_file(int sockfd)
+{
+    int n; 
+    FILE *fp;
+    char buffer[SIZE];
+
+    fp = fopen(PATH_TO_FILE_AQI_CON, "w");
+    if(fp==NULL)
+    {
+        perror("[-]Error in creating file.");
+        exit(1);
+    }
+
+    while(1)
+    {
+        n = recv(sockfd, buffer, SIZE, 0);
+        if(n<=0)
+        {
+            fclose(fp);
+            break;
+            return 0;
+        }
+        
+        fprintf(fp, "%s", buffer);
+        printf("Update to file %s!\n", PATH_TO_FILE_AQI_CON);
+        bzero(buffer, SIZE);
+    }
+}
+
+/* Receive link to wget new file json */
+void *sock_receive_file_AQI(void *arg)
+{
+    int e;
+    int sockfd, new_sock;
+    struct sockaddr_in server_addr, new_addr;
+    socklen_t addr_size;
+    char buffer[SIZE];
+
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(PORT_AQI_CON);
+    server_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
+
+    bind(sockfd,(struct sockaddr*)&server_addr, sizeof(server_addr));
+    listen(sockfd, 10);
+    
+    printf("[+]Listening...\n");
+    
+    while (1)
+    {
+        addr_size = sizeof(new_addr);
+        new_sock = accept(sockfd,(struct sockaddr*)&new_addr, &addr_size);
+
+        if(!write_file(new_sock))
+        {
+            printf("Update done!\n");
+        }
+    }
+}
+
+
 int main()
 {
     pthread_t thread_receive_ip;
     pthread_t thread_send_ip;
+    pthread_t thread_receive_AQI;
 
     printf("Start running server on Laptop!\n");
 
     pthread_create(&thread_receive_ip, NULL, sock_receive_ip, NULL);
     pthread_create(&thread_send_ip, NULL, sock_send_file_user, NULL);
+    pthread_create(&thread_receive_AQI, NULL, sock_receive_file_AQI, NULL);
 
 
     pthread_join(thread_receive_ip, NULL);
     pthread_join(thread_send_ip, NULL);
+    pthread_join(thread_receive_AQI, NULL);
 
 	return 0;
 

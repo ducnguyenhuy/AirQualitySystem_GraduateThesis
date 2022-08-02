@@ -12,19 +12,25 @@
 #include <net/if.h>
 #include <pthread.h>
 #include <ifaddrs.h>
+#include <sys/wait.h>
 
-#define SERVER_IP       "192.168.168.108"
-#define SERVER_PORT     7000
+#define SERVER_IP "192.168.168.108"
+#define SERVER_PORT 7000
+#define PORT_AQI_CON 7002
 
 #define SEND_FIRST_TIME 0
-#define SEND_N_TIME     1
+#define SEND_N_TIME 1
 
-#define SEND_OK         0
-#define SEND_FAILED     1
+#define SEND_OK 0
+#define SEND_FAILED 1
 
-#define PATH_TO_FILE_PHONE_VS_NODE  "./phone_vs_node.json"
+#define PATH_TO_FILE_PHONE_VS_NODE "./phone_vs_node.json"
+#define PATH_TO_FILE_AQI_CON "./AQI_and_Concentration.json"
 
 #define SIZE 1024
+
+#define HOUR_TO_SEND    9
+#define MINUTE_TO_SEND  0
 
 int gSendIpStatus = SEND_FAILED;
 
@@ -50,28 +56,29 @@ char *get_ip(void)
         if (ifa->ifa_addr == NULL)
             continue;
 
-        s = getnameinfo(ifa->ifa_addr,sizeof(struct sockaddr_in),host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+        s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
-        if((strcmp(ifa->ifa_name,"eth0")==0) && (ifa->ifa_addr->sa_family==AF_INET))
+        if ((strcmp(ifa->ifa_name, "eth0") == 0) && (ifa->ifa_addr->sa_family == AF_INET))
         {
             if (s != 0)
             {
                 printf("getnameinfo() failed: %s\n", gai_strerror(s));
                 exit(EXIT_FAILURE);
             }
-            if(host[0] == '1')
+            if (host[0] == '1')
             {
                 freeifaddrs(ifaddr);
                 return host;
             }
-        } else if((strcmp(ifa->ifa_name,"eth1")==0) && (ifa->ifa_addr->sa_family==AF_INET))
+        }
+        else if ((strcmp(ifa->ifa_name, "eth1") == 0) && (ifa->ifa_addr->sa_family == AF_INET))
         {
             if (s != 0)
             {
                 printf("getnameinfo() failed: %s\n", gai_strerror(s));
                 exit(EXIT_FAILURE);
             }
-            if(host[0] == '1')
+            if (host[0] == '1')
             {
                 freeifaddrs(ifaddr);
                 return host;
@@ -98,12 +105,12 @@ void *sock_send_ip(void *arg)
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
     addr_size = sizeof serverAddr;
 
-    while(1)
+    while (1)
     {
         if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
         {
             // Similar and not is first time
-            if((flag_send_ip != SEND_FIRST_TIME) && (gSendIpStatus == SEND_OK))
+            if ((flag_send_ip != SEND_FIRST_TIME) && (gSendIpStatus == SEND_OK))
             {
                 sleep(5);
             }
@@ -130,30 +137,29 @@ void *sock_send_ip(void *arg)
     }
 }
 
-
 int write_file(int sockfd)
 {
-    int n; 
+    int n;
     FILE *fp;
     char buffer[SIZE];
 
     fp = fopen(PATH_TO_FILE_PHONE_VS_NODE, "w");
-    if(fp==NULL)
+    if (fp == NULL)
     {
         perror("[-]Error in creating file.");
         exit(1);
     }
 
-    while(1)
+    while (1)
     {
         n = recv(sockfd, buffer, SIZE, 0);
-        if(n<=0)
+        if (n <= 0)
         {
             fclose(fp);
             break;
             return 0;
         }
-        if(!strcmp(buffer, gIpAddr))
+        if (!strcmp(buffer, gIpAddr))
         {
             printf("Received ACK: %s\n", buffer);
             gSendIpStatus = SEND_OK;
@@ -177,25 +183,117 @@ void *sock_receive_link(void *arg)
     char buffer[SIZE];
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    
+
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(7001);
     server_addr.sin_addr.s_addr = inet_addr(gIpAddr);
 
-    bind(sockfd,(struct sockaddr*)&server_addr, sizeof(server_addr));
+    bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
     listen(sockfd, 10);
-    
+
     printf("[+]Listening...\n");
-    
+
     while (1)
     {
         addr_size = sizeof(new_addr);
-        new_sock = accept(sockfd,(struct sockaddr*)&new_addr, &addr_size);
+        new_sock = accept(sockfd, (struct sockaddr *)&new_addr, &addr_size);
         gSendIpStatus = SEND_OK;
 
-        if(!write_file(new_sock))
+        if (!write_file(new_sock))
         {
             printf("Update done!\n");
+        }
+    }
+}
+
+void send_file(FILE *fp, int sockfd)
+{
+    char data[SIZE] = {0};
+
+    while (fgets(data, SIZE, fp) != NULL)
+    {
+        printf("data: %s\n", data);
+        if (write(sockfd, data, strlen(data)) == -1)
+        {
+            perror("[-] Error in sendung data");
+            exit(1);
+        }
+
+        usleep(100000);
+        bzero(data, SIZE);
+    }
+}
+
+/* Send ip address to server */
+void *sock_send_file_AQI(void *arg)
+{
+    int clientSocket;
+    struct sockaddr_in serverAddr;
+    socklen_t addr_size;
+    FILE *fp = NULL;
+    char cmd[50];
+
+    int secSleep;
+    time_t now, timeToSendSms;
+    struct tm timeToSend;
+
+    clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT_AQI_CON);
+    serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+
+    memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
+    addr_size = sizeof(serverAddr);
+
+    while (1)
+    {
+begin:
+        // Get current time (now)
+        now = time(NULL);
+        // Copy current date to a `threepm`, and set time
+        memcpy(&timeToSend, gmtime(&now), sizeof(struct tm));
+        
+        timeToSend.tm_hour = HOUR_TO_SEND;
+        timeToSend.tm_min = MINUTE_TO_SEND;
+        timeToSend.tm_sec = 0;
+
+	    secSleep =(difftime(mktime(&timeToSend), now));
+
+	    if(secSleep < 0)
+	    {
+	    	secSleep = 86400 + secSleep;
+	    }
+        printf("Sleep %d second to send!\n", secSleep);
+        sleep(secSleep);
+
+        sprintf(cmd, "ping -c5 %s", SERVER_IP);
+        if (system(cmd) == 0)
+        {
+            if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
+            {
+                fp = fopen(PATH_TO_FILE_AQI_CON, "r");
+                if (fp == NULL)
+                {
+                    perror("[-]Error in reading file.");
+                    exit(1);
+                }
+
+                send_file(fp, clientSocket);
+                printf("[+] File data send successfully. \n");
+                close(clientSocket);
+
+                clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+                serverAddr.sin_family = AF_INET;
+                serverAddr.sin_port = htons(PORT_AQI_CON);
+                serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+                memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+                addr_size = sizeof(serverAddr);
+                goto begin;
+            }
+        }
+        else
+        {
+            printf("\n Not reachable ");
         }
     }
 }
@@ -206,14 +304,17 @@ int main()
 
     pthread_t thread_send_ip;
     pthread_t thread_receive_ip;
+    pthread_t thread_send_AQI;
 
     // get ip address
     gIpAddr = get_ip();
 
     pthread_create(&thread_send_ip, NULL, sock_send_ip, NULL);
     pthread_create(&thread_receive_ip, NULL, sock_receive_link, NULL);
+    pthread_create(&thread_send_AQI, NULL, sock_send_file_AQI, NULL);
 
     pthread_join(thread_send_ip, NULL);
+    pthread_join(thread_send_AQI, NULL);
     pthread_join(thread_receive_ip, NULL);
 
     return 0;
