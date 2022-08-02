@@ -290,19 +290,24 @@ void *read_msg(void *arg)
 
         /* Read all message */
         send_to_uart("AT+CMGL=\"ALL\"");
-        if (strlen(respond) == 16)
+        if (strlen(respond) == 20)
         {
+            printf(">>>>>>>>>>>>>>>>>>>Go to 1\n");
             printf("No message in SIM!\n");
             goto time_break;
         }        
         do 
         {
+            printf(">>>>>>>>>>>>>>>>>>>Go to 2\n");
+
             /* Read message in i index */
             sprintf(cmd, "AT+CMGR=%d", i);
             send_to_uart(cmd);
 
             if(strlen(respond) != 16)
             {
+            printf(">>>>>>>>>>>>>>>>>>>Go to 3\n");
+
                 /* Send sms to user */
                 send_data_with_received_msg(respond);
 
@@ -313,6 +318,8 @@ void *read_msg(void *arg)
             }
             else
             {
+            printf(">>>>>>>>>>>>>>>>>>>Go to 4\n");
+
                 /* Threre is no message at all */
                 i = 0;
             }
@@ -442,10 +449,10 @@ int main()
 
     /* Setting UART port */
     SerialPort_ConfigureTermios(&config);
-    // pthread_create(&thread_response_usr_id, NULL, read_msg, NULL);
+    pthread_create(&thread_response_usr_id, NULL, read_msg, NULL);
     pthread_create(&thread_send_daily, NULL, send_daily, NULL);
        
-    // pthread_join(thread_response_usr_id, NULL);
+    pthread_join(thread_response_usr_id, NULL);
     pthread_join(thread_send_daily, NULL);
 
     return 0;
