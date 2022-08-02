@@ -13,14 +13,17 @@
 #include <sys/inotify.h>
 #include <limits.h>
 
-#define FLIE_LINK   "./file_store_link.txt"
-#define BUF_LEN (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
+#define FLIE_LINK       "./file_store_link.txt"
+#define FILE_TO_SEND    "./phone_vs_node.json"
+#define BUF_LEN          (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
 #define PORT_NUM            7000
 #define SERVER_IP           "192.168.168.108"
 
 #define RECEIVE_IP          0
 #define NOT_RECEIVE_IP      1
+
+#define SIZE 1024
 
 char *ipReceived = NULL;
 int flag_receive_ip = NOT_RECEIVE_IP;
@@ -86,15 +89,30 @@ void *sock_receive_ip(void *arg)
                 memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
                 addr_size = sizeof(serverAddr);
             }
-        }
     }
-    
+    }
+}
+
+void send_file(FILE *fp, int sockfd)
+{
+    char data[SIZE] = {0};
+
+    while(fgets(data, SIZE, fp)!=NULL)
+    {
+        printf("data: %s\n", data);
+        if(send(sockfd, data, sizeof(data), 0)== -1)
+        {
+            perror("[-] Error in sendung data");
+            exit(1);
+        }
+        usleep(100000);
+        bzero(data, SIZE);
+    }
 }
 
 /* Send ip address to server */
-void *sock_send_link(void *arg)
+void *sock_send_file_user(void *arg)
 {
-    char cmd[100];
     int clientSocket;
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
@@ -104,6 +122,7 @@ void *sock_send_link(void *arg)
         printf("Wait to receive IP!\n");
         sleep(1);
     }
+    
     clientSocket = socket(PF_INET, SOCK_STREAM, 0);
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(7001);
@@ -114,56 +133,51 @@ void *sock_send_link(void *arg)
 
     while(1)
     {
-        int inotifyFd, wd, j;
-        char buf[BUF_LEN];
-        ssize_t numRead;
+        int inotifyFd, wd;
+        char buff[BUF_LEN];
+        uint32_t numRead;
         char *p;
+        FILE *fp  = NULL;
         struct inotify_event *event;
-        FILE *f_link;
 
         /* Create inotify instance */
         inotifyFd = inotify_init();
-        if (inotifyFd == -1)
-        {
-            printf("inotify_init!\n");
-        }
-        
+
         wd = inotify_add_watch(inotifyFd, FLIE_LINK, IN_CLOSE_WRITE);
-        if (wd == -1)
-        {
-            printf("inotify_add_watch error!\n");
-        }
-        printf("Start watching %s using\n", FLIE_LINK);
 
-        f_link = fopen(FLIE_LINK, "r");
-
+        printf("Start watching %s\n", FLIE_LINK);
         for (;;)
         { /* Read events forever */
-            numRead = read(inotifyFd, buf, BUF_LEN);
-            if (numRead == 0)
-                printf("read() from inotify fd returned 0!");
-            if (numRead == -1)
-                printf("read");
-            if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
-            {
-                char IPbuffer[100];
-                fgets(IPbuffer, 100, f_link);
+            numRead = read(inotifyFd, buff, BUF_LEN);
 
-                sprintf(cmd, "%s", IPbuffer);
-                write(clientSocket, cmd, strlen(cmd));
-                printf("Sent: %s\n", cmd);
-                clientSocket = socket(PF_INET, SOCK_STREAM, 0);
-                serverAddr.sin_family = AF_INET;
-                serverAddr.sin_port = htons(7001);
-                serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
-                memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
-                addr_size = sizeof(serverAddr);
-            }
+            event = (struct inotify_event *)buff;
+            if (event->mask & IN_CLOSE_WRITE)
+            {
+                printf("IN_CLOSE_WRITE!\n");
+                if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
+                {
+                    printf("[+]Connected to server.\n");
+                    fp = fopen(FILE_TO_SEND, "r");
+                    if(fp == NULL)
+                    {
+                        perror("[-]Error in reading file.");
+                        exit(1);
+                    }
+                    send_file(fp,clientSocket);
+                    printf("[+] File data send successfully. \n");
+                    close(clientSocket);        
+                    
+                    clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+                    serverAddr.sin_family = AF_INET;
+                    serverAddr.sin_port = htons(7001);
+                    serverAddr.sin_addr.s_addr = inet_addr(ipReceived);
+                    memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+                    addr_size = sizeof(serverAddr); 
+                } 
         }
     }
-
 }
-
+}
 
 int main()
 {
@@ -173,7 +187,7 @@ int main()
     printf("Start running server on Laptop!\n");
 
     pthread_create(&thread_receive_ip, NULL, sock_receive_ip, NULL);
-    pthread_create(&thread_send_ip, NULL, sock_send_link, NULL);
+    pthread_create(&thread_send_ip, NULL, sock_send_file_user, NULL);
 
 
     pthread_join(thread_receive_ip, NULL);

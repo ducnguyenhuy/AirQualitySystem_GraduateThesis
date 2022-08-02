@@ -22,7 +22,9 @@
 #define SEND_OK         0
 #define SEND_FAILED     1
 
-#define PATH_TO_FILE_PHONE_VS_NODE  "/tmp/phone_vs_node.json"
+#define PATH_TO_FILE_PHONE_VS_NODE  "./phone_vs_node.json"
+
+#define SIZE 1024
 
 int gSendIpStatus = SEND_FAILED;
 
@@ -100,12 +102,8 @@ void *sock_send_ip(void *arg)
     {
         if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
         {
-            // Get ip address
-            char *IPbuffer;
-            IPbuffer = get_ip();
-
             // Similar and not is first time
-            if(!strcmp(IPbuffer, gIpAddr) && (flag_send_ip != SEND_FIRST_TIME) && (gSendIpStatus == SEND_OK))
+            if((flag_send_ip != SEND_FIRST_TIME) && (gSendIpStatus == SEND_OK))
             {
                 sleep(5);
             }
@@ -114,7 +112,7 @@ void *sock_send_ip(void *arg)
                 gSendIpStatus = SEND_FAILED;
 
                 // Send ip address if it is not first time and has different
-                sprintf(cmd, "%s", IPbuffer);
+                sprintf(cmd, "%s", gIpAddr);
                 write(clientSocket, cmd, strlen(cmd));
 
                 clientSocket = socket(PF_INET, SOCK_STREAM, 0);
@@ -132,61 +130,74 @@ void *sock_send_ip(void *arg)
     }
 }
 
-/* Receive link to wget new file json */
-void *sock_receive_link(void *arg)
+
+int write_file(int sockfd)
 {
-    char cmd[100];
-    int serverSocket = -1;
-    int newSocket = -1;
-    struct sockaddr_in server_addr;
+    int n; 
+    FILE *fp;
+    char buffer[SIZE];
 
-    uint8_t *buffer = (uint8_t *)malloc(1024 * sizeof(uint8_t));
-    int readValue = 1;
-
-    memset(buffer, 0, sizeof(buffer));
-    memset(&server_addr, 0, sizeof(server_addr));
-
-    //Config socket
-    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = inet_addr(gIpAddr);
-    server_addr.sin_port = htons(7001);
-    bind(serverSocket, (struct sockaddr*)&server_addr, sizeof(server_addr));
-    listen(serverSocket, 10);
+    fp = fopen(PATH_TO_FILE_PHONE_VS_NODE, "w");
+    if(fp==NULL)
+    {
+        perror("[-]Error in creating file.");
+        exit(1);
+    }
 
     while(1)
     {
-        newSocket = accept(serverSocket, (struct sockaddr *)NULL, NULL);
-        readValue = read(newSocket, buffer, 1024);
-
-        if(readValue)
+        n = recv(sockfd, buffer, SIZE, 0);
+        if(n<=0)
         {
-            // if send ip failed
-            if(!strcmp(buffer, gIpAddr))
-            {
-                printf("Received ACK: %s\n", buffer);
-                gSendIpStatus = SEND_OK;
-            }
+            fclose(fp);
+            break;
+            return 0;
+        }
+        if(!strcmp(buffer, gIpAddr))
+        {
+            printf("Received ACK: %s\n", buffer);
+            gSendIpStatus = SEND_OK;
+            fclose(fp);
+            return 0;
+        }
 
-            if(!strncmp(buffer, "http", 4))
-            {
-                sprintf(gLink, "%s", buffer);
-                printf("Received link: %s\n", gLink);
-                // delete if file phone_vs_node.json exist
-                if(!access(PATH_TO_FILE_PHONE_VS_NODE, F_OK))
-                {
-                    sprintf(cmd, "rm -rf %s", PATH_TO_FILE_PHONE_VS_NODE);
-                    system(cmd);
-                    printf("Delete old file phone_vs_node.json!\n");
-                }
+        fprintf(fp, "%s", buffer);
+        printf("Update to file %s!\n", PATH_TO_FILE_PHONE_VS_NODE);
+        bzero(buffer, SIZE);
+    }
+}
 
-                sprintf(cmd, "wget -O %s -T 120 %s", PATH_TO_FILE_PHONE_VS_NODE, gLink);
-                system(cmd);
-                printf("Download file phone_vs_node.json from server!\n");
-            }
+/* Receive link to wget new file json */
+void *sock_receive_link(void *arg)
+{
+    int e;
+    int sockfd, new_sock;
+    struct sockaddr_in server_addr, new_addr;
+    socklen_t addr_size;
+    char buffer[SIZE];
+
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(7001);
+    server_addr.sin_addr.s_addr = inet_addr(gIpAddr);
+
+    bind(sockfd,(struct sockaddr*)&server_addr, sizeof(server_addr));
+    listen(sockfd, 10);
+    
+    printf("[+]Listening...\n");
+    
+    while (1)
+    {
+        addr_size = sizeof(new_addr);
+        new_sock = accept(sockfd,(struct sockaddr*)&new_addr, &addr_size);
+        gSendIpStatus = SEND_OK;
+
+        if(!write_file(new_sock))
+        {
+            printf("Update done!\n");
         }
     }
-
 }
 
 int main()
@@ -202,12 +213,8 @@ int main()
     pthread_create(&thread_send_ip, NULL, sock_send_ip, NULL);
     pthread_create(&thread_receive_ip, NULL, sock_receive_link, NULL);
 
-
     pthread_join(thread_send_ip, NULL);
     pthread_join(thread_receive_ip, NULL);
 
     return 0;
 }
-
-
-
