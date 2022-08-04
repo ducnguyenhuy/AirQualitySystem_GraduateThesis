@@ -120,11 +120,12 @@ void thread_valid(void);
 static Std_ReturnType LoRaSV_SendACK();
 
 /*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
-#define FILE_NAME "/tmp/aqi_and_concentration.json"
+#define FILE_NAME           "/tmp/aqi_and_concentration.json"
+#define FILE_ERROR_NODE     "/tmp/error_node.json"
 
 #define NUMBER_SAMPLE_PER_HOUR 1
 #define MAX_NUMBER_NODE 2
-
+#define MAX_ERROR_TIMEOUT      15
 int bufferNodeIndex = 0;
 
 float I[8] = {0, 50, 100, 150, 200, 300, 400, 500};
@@ -153,6 +154,7 @@ typedef struct
     int pm25Index;
     int coIndex;
     int buff12hIndex;
+    long int timeStamp;
 } data_of_node_t;
 
 typedef struct
@@ -259,7 +261,6 @@ float cal_aqi_pm25(data_of_node_t *data_node)
 
     if (data_node->buff12hIndex != 12)
     {
-        printf("Can't not calculate AQI of PM25\n");
         return -1;
     }
 
@@ -333,11 +334,17 @@ void store_new_data(data_of_node_t *data_node, float valPm25, float valCo)
     int i;
     float meanPm25;
     float aqiPm25;
+
     data_node->valPM25.pm_data_now[data_node->pm25Index] = valPm25;
     data_node->valCO.co_data_now[data_node->coIndex] = valCo;
 
     data_node->pm25Index++;
     data_node->coIndex++;
+
+    // Get time stamp
+    data_node->timeStamp = (int)time(NULL);
+
+    printf(">>>>>>>>>>>>>>>>>>>>>> Time Stamp: %d\n", data_node->timeStamp);
 
     if (data_node->pm25Index == NUMBER_SAMPLE_PER_HOUR)
     {
@@ -354,10 +361,10 @@ void store_new_data(data_of_node_t *data_node, float valPm25, float valCo)
         {
             data_node->valPM25.buff_12_h[data_node->buff12hIndex] = mean_of_pm25(data_node);
 
-            for (i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
-            {
-                printf("data_node->valPM25.pm_data_now[%d] = %f\n", i, data_node->valPM25.pm_data_now[i]);
-            }
+            // for (i = 0; i < NUMBER_SAMPLE_PER_HOUR; i++)
+            // {
+            //     printf("data_node->valPM25.pm_data_now[%d] = %f\n", i, data_node->valPM25.pm_data_now[i]);
+            // }
 
             data_node->buff12hIndex++;
         }
@@ -413,6 +420,7 @@ int update_to_node(LoRaMacMessageData_t macMsgData)
 
 /* Thread to calculate AQI index, and write to json file */
 void *cal_and_write_to_file(void *arg);
+void *check_error_node(void *arg);
 
 /*========== FUNCTION TO WORK WITH JSON ==========*/
 int creat_file(char *file_name)
@@ -465,6 +473,48 @@ int write_to_json_file(char *filename, data_write_to_json_t data)
     json_array_append_value(arr, new_val);
     json_serialize_to_file_pretty(root, FILE_NAME);
     return 0;
+}
+
+int delete_node_in_file_json(int node_addr)
+{
+    JSON_Value *root;
+    JSON_Object *node, *node_i;
+    JSON_Array *arr;
+    int lenArr, i;
+    root = json_parse_file_with_comments(FILE_NAME);
+    node = json_value_get_object(root);
+    arr = json_object_get_array(node, "node");
+
+    lenArr = json_array_get_count(arr);
+
+    for (i = 0; i < lenArr; i++)
+    {
+        node_i = json_array_get_object(arr, i);
+        if (json_object_get_number(node_i, "address") == node_addr)
+        {
+            printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Remove index %d in file %s\n", i, FILE_NAME);
+            json_array_remove(arr, i);
+            json_serialize_to_file_pretty(root, FILE_NAME);
+            return 0;
+        }
+    }
+}
+
+int remove_node_in_gBuffer(int node_addr)
+{
+    int i = 0, j = 0;
+    for(i = 0; i < bufferNodeIndex; i++)
+    {
+         if(gBufferNode[i].nodeAddr == node_addr)
+        {
+            for(j = i; j < bufferNodeIndex - 1; j++)
+            {
+                gBufferNode[j] = gBufferNode[j+1];
+            }
+            bufferNodeIndex--;
+            return 0;
+        }
+    }
 }
 
 /*--------------------------------------------------------------------------------------------------------------------- */
@@ -1254,6 +1304,7 @@ int main(int argc, char **argv)
     pthread_t thrid_up;
     pthread_t thrid_down;
     pthread_t handle_data_thread;
+    pthread_t thrid_check_node_error;
 
     /* configuration files management */
     if (access(debug_cfg_path, R_OK) == 0)
@@ -1314,6 +1365,7 @@ int main(int argc, char **argv)
 
     /* threads to calculate aqi and write down to file */
     pthread_create(&handle_data_thread, NULL, cal_and_write_to_file, NULL);
+    pthread_create(&thrid_check_node_error, NULL, check_error_node, NULL);
 
     MSG("DEBUG: MAIN\n");
 
@@ -1534,11 +1586,6 @@ void thread_up(void)
             printf("This msg %u from node %u : %s\r\n", macMsgData.FHDR.FCnt, (macMsgData.FHDR.DevAddr) & 0xFF, macMsgData.FRMPayload);
             /* Log Data */
 
-            /*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
-
-            update_to_node(macMsgData);
-
-            /*--------------------------------------------------------------------------------------------------------------------- */
 
             // delay to send
             wait_ms(10);
@@ -1586,6 +1633,12 @@ void thread_up(void)
             printf("\r\n");
             /* wait inter-packet delay */
             wait_ms(delay);
+            /*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
+
+            update_to_node(macMsgData);
+
+            /*--------------------------------------------------------------------------------------------------------------------- */
+
         }
 
         /* exit loop on user signals */
@@ -1623,5 +1676,37 @@ void *cal_and_write_to_file(void *arg)
             write_to_json_file(FILE_NAME, tmpDataJson);
             usleep(10000);
         }
+    }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* --- THREAD 3: CHECK ERROR NODE ---------- */
+void *check_error_node(void *arg)
+{
+    long int i, timeStamp, diff;
+    char cmd[80];
+    while(1)
+    {
+        timeStamp = (int)time(NULL);
+        for(int i = 0; i < bufferNodeIndex; i++)
+        {
+            diff = timeStamp - gBufferNode[i].timeStamp;
+            printf("timeStamp: %ld, gBufferNode[i].timeStamp: %ld\n", timeStamp, gBufferNode[i].timeStamp);
+
+            if(diff > MAX_ERROR_TIMEOUT)
+            {
+                // Ghi vao file, xoa trong file json va trong buffer
+                printf("Echo to file %s\n", FILE_ERROR_NODE);
+                sprintf(cmd, "echo \"Node %d have problem\" >> %s", gBufferNode[i].nodeAddr, FILE_ERROR_NODE);
+                system(cmd);
+                pthread_mutex_lock(&mx_concent);
+                delete_node_in_file_json(gBufferNode[i].nodeAddr);
+                remove_node_in_gBuffer(gBufferNode[i].nodeAddr);
+                pthread_mutex_unlock(&mx_concent);
+            }
+            break;
+        }
+        sleep(10);
     }
 }
