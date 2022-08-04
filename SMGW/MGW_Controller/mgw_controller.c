@@ -121,7 +121,7 @@ static Std_ReturnType LoRaSV_SendACK();
 
 /*----------------------------------------------------Coded by DucNH--------------------------------------------------- */
 #define FILE_NAME           "/tmp/aqi_and_concentration.json"
-#define FILE_ERROR_NODE     "/tmp/error_node.json"
+#define FILE_ERROR_NODE     "/tmp/error_node.txt"
 
 #define NUMBER_SAMPLE_PER_HOUR 1
 #define MAX_NUMBER_NODE 2
@@ -1704,9 +1704,10 @@ void *check_error_node(void *arg)
                 delete_node_in_file_json(gBufferNode[i].nodeAddr);
                 remove_node_in_gBuffer(gBufferNode[i].nodeAddr);
                 pthread_mutex_unlock(&mx_concent);
+                goto sleep_5s;
             }
-            break;
         }
-        sleep(10);
+sleep_10s:
+        sleep(5);
     }
 }

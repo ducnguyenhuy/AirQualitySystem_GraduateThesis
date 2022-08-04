@@ -13,24 +13,30 @@
 #include <pthread.h>
 #include <ifaddrs.h>
 #include <sys/wait.h>
+#include <sys/inotify.h>
+#include <limits.h>
 
-#define SERVER_IP "192.168.168.108"
-#define SERVER_PORT 7000
-#define PORT_AQI_CON 7002
 
-#define SEND_FIRST_TIME 0
-#define SEND_N_TIME 1
+#define SERVER_IP           "202.191.56.104"
+#define PORT_IP             5592
+#define PORT_AQI_CON        5591
+#define PORT_ERROR_NODE     5590
 
-#define SEND_OK 0
-#define SEND_FAILED 1
+#define SEND_FIRST_TIME     0
+#define SEND_N_TIME         1
 
-#define PATH_TO_FILE_PHONE_VS_NODE "./phone_vs_node.json"
-#define PATH_TO_FILE_AQI_CON "./AQI_and_Concentration.json"
+#define SEND_OK             0
+#define SEND_FAILED         1
 
+#define PATH_TO_FILE_PHONE_VS_NODE  "/tmp/phone_vs_node.json"
+#define PATH_TO_FILE_AQI_CON        "/tmp/AQI_and_Concentration.json"
+#define PATH_TO_FILE_ERROR          "/tmp/error_node.json"
 #define SIZE 1024
 
 #define HOUR_TO_SEND    9
 #define MINUTE_TO_SEND  0
+
+#define BUF_LEN          (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
 int gSendIpStatus = SEND_FAILED;
 
@@ -100,7 +106,7 @@ void *sock_send_ip(void *arg)
     // Config socket
     clientSocket = socket(PF_INET, SOCK_STREAM, 0);
     serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(SERVER_PORT);
+    serverAddr.sin_port = htons(PORT_IP);
     serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
     addr_size = sizeof serverAddr;
@@ -124,7 +130,7 @@ void *sock_send_ip(void *arg)
 
                 clientSocket = socket(PF_INET, SOCK_STREAM, 0);
                 serverAddr.sin_family = AF_INET;
-                serverAddr.sin_port = htons(SERVER_PORT);
+                serverAddr.sin_port = htons(PORT_IP);
                 serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
                 memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
                 addr_size = sizeof(serverAddr);
@@ -247,7 +253,6 @@ void *sock_send_file_AQI(void *arg)
 
     while (1)
     {
-begin:
         // Get current time (now)
         now = time(NULL);
         // Copy current date to a `threepm`, and set time
@@ -266,38 +271,95 @@ begin:
         printf("Sleep %d second to send!\n", secSleep);
         sleep(secSleep);
 
-        sprintf(cmd, "ping -c5 %s", SERVER_IP);
-        if (system(cmd) == 0)
+        if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
         {
-            if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
+            fp = fopen(PATH_TO_FILE_AQI_CON, "r");
+            if (fp == NULL)
             {
-                fp = fopen(PATH_TO_FILE_AQI_CON, "r");
-                if (fp == NULL)
-                {
-                    perror("[-]Error in reading file.");
-                    exit(1);
-                }
-
-                send_file(fp, clientSocket);
-                printf("[+] File data send successfully. \n");
-                close(clientSocket);
-
-                clientSocket = socket(PF_INET, SOCK_STREAM, 0);
-                serverAddr.sin_family = AF_INET;
-                serverAddr.sin_port = htons(PORT_AQI_CON);
-                serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
-                memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
-                addr_size = sizeof(serverAddr);
-                goto begin;
+                perror("[-]Error in reading file.");
+                exit(1);
             }
+
+            send_file(fp, clientSocket);
+            printf("[+] File data send successfully. \n");
+            close(clientSocket);
+
+            clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+            serverAddr.sin_family = AF_INET;
+            serverAddr.sin_port = htons(PORT_AQI_CON);
+            serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+            memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+            addr_size = sizeof(serverAddr);
         }
-        else
-        {
-            printf("\n Not reachable ");
-        }
+        
     }
 }
 
+
+/* Send ip address to server */
+void *sock_send_node_error(void *arg)
+{
+    char cmd[50];
+    int clientSocket;
+    struct sockaddr_in serverAddr;
+    socklen_t addr_size;
+
+    clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT_ERROR_NODE);
+    serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+
+    memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
+    addr_size = sizeof(serverAddr);
+
+    while (1)
+    {
+        int inotifyFd, wd;
+        char buff[BUF_LEN];
+        uint32_t numRead;
+        char *p;
+        FILE *fp  = NULL;
+        struct inotify_event *event;
+
+        /* Create inotify instance */
+        inotifyFd = inotify_init();
+
+        wd = inotify_add_watch(inotifyFd, PATH_TO_FILE_ERROR, IN_CLOSE_WRITE);
+
+        printf("Start watching %s\n", PATH_TO_FILE_ERROR);
+        for (;;)
+        { /* Read events forever */
+            numRead = read(inotifyFd, buff, BUF_LEN);
+
+            event = (struct inotify_event *)buff;
+            if (event->mask & IN_CLOSE_WRITE)
+            {
+                printf("IN_CLOSE_WRITE!\n");
+
+                if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
+                {
+                        fp = fopen(PATH_TO_FILE_ERROR, "r");
+                        if (fp == NULL)
+                        {
+                            perror("[-]Error in reading file.");
+                            exit(1);
+                        }
+
+                        send_file(fp, clientSocket);
+                        printf("[+] File data send successfully. \n");
+                        close(clientSocket);
+
+                        clientSocket = socket(PF_INET, SOCK_STREAM, 0);
+                        serverAddr.sin_family = AF_INET;
+                        serverAddr.sin_port = htons(PORT_ERROR_NODE);
+                        serverAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+                        memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+                        addr_size = sizeof(serverAddr);
+                }
+            }
+        }
+    }
+}
 int main()
 {
     printf("Start running client on SMGW!\n");
@@ -305,6 +367,7 @@ int main()
     pthread_t thread_send_ip;
     pthread_t thread_receive_ip;
     pthread_t thread_send_AQI;
+    pthread_t thread_send_NODE_ERROR;
 
     // get ip address
     gIpAddr = get_ip();
@@ -312,10 +375,12 @@ int main()
     pthread_create(&thread_send_ip, NULL, sock_send_ip, NULL);
     pthread_create(&thread_receive_ip, NULL, sock_receive_link, NULL);
     pthread_create(&thread_send_AQI, NULL, sock_send_file_AQI, NULL);
+    pthread_create(&thread_send_NODE_ERROR, NULL, sock_send_node_error, NULL);
 
     pthread_join(thread_send_ip, NULL);
     pthread_join(thread_send_AQI, NULL);
     pthread_join(thread_receive_ip, NULL);
+    pthread_join(thread_send_NODE_ERROR, NULL);
 
     return 0;
 }
