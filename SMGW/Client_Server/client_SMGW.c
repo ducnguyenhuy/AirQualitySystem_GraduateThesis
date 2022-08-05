@@ -17,7 +17,8 @@
 #include <limits.h>
 
 
-#define SERVER_IP           "202.191.56.104"
+// #define SERVER_IP           "202.191.56.104"
+#define SERVER_IP           "192.168.168.108"
 #define PORT_IP             5592
 #define PORT_AQI_CON        5591
 #define PORT_ERROR_NODE     5590
@@ -28,9 +29,10 @@
 #define SEND_OK             0
 #define SEND_FAILED         1
 
-#define PATH_TO_FILE_PHONE_VS_NODE  "/tmp/phone_vs_node.json"
-#define PATH_TO_FILE_AQI_CON        "/tmp/AQI_and_Concentration.json"
-#define PATH_TO_FILE_ERROR          "/tmp/error_node.json"
+#define FILE_PHONE_VS_NODE          "/tmp/phone_and_node.json"
+#define FILE_AQI_CON                "/tmp/aqi_and_concentration.json"
+#define FILE_NODE_NOT_WORK          "/tmp/node_not_work.txt"
+
 #define SIZE 1024
 
 #define HOUR_TO_SEND    9
@@ -41,9 +43,6 @@
 int gSendIpStatus = SEND_FAILED;
 
 char *gIpAddr = NULL;
-int gPort = 7000;
-
-char gLink[100];
 
 char *get_ip(void)
 {
@@ -149,10 +148,11 @@ int write_file(int sockfd)
     FILE *fp;
     char buffer[SIZE];
 
-    fp = fopen(PATH_TO_FILE_PHONE_VS_NODE, "w");
+    fp = fopen(FILE_PHONE_VS_NODE, "w");
+
     if (fp == NULL)
     {
-        perror("[-]Error in creating file.");
+        perror("Error in creating file.");
         exit(1);
     }
 
@@ -161,7 +161,9 @@ int write_file(int sockfd)
         n = recv(sockfd, buffer, SIZE, 0);
         if (n <= 0)
         {
+            printf("Start updating %s ...\n", FILE_PHONE_VS_NODE);
             fclose(fp);
+            printf("Update successfully!\n", FILE_PHONE_VS_NODE);
             break;
             return 0;
         }
@@ -169,17 +171,15 @@ int write_file(int sockfd)
         {
             printf("Received ACK: %s\n", buffer);
             gSendIpStatus = SEND_OK;
-            fclose(fp);
             return 0;
         }
-
+        
         fprintf(fp, "%s", buffer);
-        printf("Update to file %s!\n", PATH_TO_FILE_PHONE_VS_NODE);
         bzero(buffer, SIZE);
     }
 }
 
-/* Receive link to wget new file json */
+/* Receive list user */
 void *sock_receive_link(void *arg)
 {
     int e;
@@ -197,7 +197,7 @@ void *sock_receive_link(void *arg)
     bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
     listen(sockfd, 10);
 
-    printf("[+]Listening...\n");
+    printf("Listening on socket receive list user...\n");
 
     while (1)
     {
@@ -205,10 +205,7 @@ void *sock_receive_link(void *arg)
         new_sock = accept(sockfd, (struct sockaddr *)&new_addr, &addr_size);
         gSendIpStatus = SEND_OK;
 
-        if (!write_file(new_sock))
-        {
-            printf("Update done!\n");
-        }
+        write_file(new_sock);
     }
 }
 
@@ -218,10 +215,9 @@ void send_file(FILE *fp, int sockfd)
 
     while (fgets(data, SIZE, fp) != NULL)
     {
-        printf("data: %s\n", data);
         if (write(sockfd, data, strlen(data)) == -1)
         {
-            perror("[-] Error in sendung data");
+            perror("Error in sendung data");
             exit(1);
         }
 
@@ -268,12 +264,12 @@ void *sock_send_file_AQI(void *arg)
 	    {
 	    	secSleep = 86400 + secSleep;
 	    }
-        printf("Sleep %d second to send!\n", secSleep);
+        printf("Sleep %d seconds befor send file %s!\n", secSleep, FILE_AQI_CON);
         sleep(secSleep);
 
         if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
         {
-            fp = fopen(PATH_TO_FILE_AQI_CON, "r");
+            fp = fopen(FILE_AQI_CON, "r");
             if (fp == NULL)
             {
                 perror("[-]Error in reading file.");
@@ -281,7 +277,7 @@ void *sock_send_file_AQI(void *arg)
             }
 
             send_file(fp, clientSocket);
-            printf("[+] File data send successfully. \n");
+            printf("File %s send successfully \n", FILE_AQI_CON);
             close(clientSocket);
 
             clientSocket = socket(PF_INET, SOCK_STREAM, 0);
@@ -324,9 +320,9 @@ void *sock_send_node_error(void *arg)
         /* Create inotify instance */
         inotifyFd = inotify_init();
 
-        wd = inotify_add_watch(inotifyFd, PATH_TO_FILE_ERROR, IN_CLOSE_WRITE);
+        wd = inotify_add_watch(inotifyFd, FILE_NODE_NOT_WORK, IN_CLOSE_WRITE);
 
-        printf("Start watching %s\n", PATH_TO_FILE_ERROR);
+        printf("Start watching %s\n", FILE_NODE_NOT_WORK);
         for (;;)
         { /* Read events forever */
             numRead = read(inotifyFd, buff, BUF_LEN);
@@ -334,19 +330,18 @@ void *sock_send_node_error(void *arg)
             event = (struct inotify_event *)buff;
             if (event->mask & IN_CLOSE_WRITE)
             {
-                printf("IN_CLOSE_WRITE!\n");
 
                 if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
                 {
-                        fp = fopen(PATH_TO_FILE_ERROR, "r");
+                        fp = fopen(FILE_NODE_NOT_WORK, "r");
                         if (fp == NULL)
                         {
-                            perror("[-]Error in reading file.");
+                            perror("Error in reading file.");
                             exit(1);
                         }
 
                         send_file(fp, clientSocket);
-                        printf("[+] File data send successfully. \n");
+                        printf("File %s send successfully!\n", FILE_NODE_NOT_WORK);
                         close(clientSocket);
 
                         clientSocket = socket(PF_INET, SOCK_STREAM, 0);
@@ -360,6 +355,7 @@ void *sock_send_node_error(void *arg)
         }
     }
 }
+
 int main()
 {
     printf("Start running client on SMGW!\n");

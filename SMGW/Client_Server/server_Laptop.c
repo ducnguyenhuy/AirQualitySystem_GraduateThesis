@@ -15,18 +15,20 @@
 #include <sys/wait.h>
 
 
-#define FLIE_LINK               "./file_store_link.txt"
-#define FILE_TO_SEND            "./phone_vs_node.json"
-#define PATH_TO_FILE_AQI_CON    "./AQI_and_Concentration.json"
-
-#define BUF_LEN             (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
+#define SERVER_IP           "192.168.168.108"
+// #define SERVER_IP           "202.191.56.104"
 
 #define PORT_IP             5592
 #define PORT_AQI_CON        5591
 #define PORT_ERROR_NODE     5590
 
-// #define SERVER_IP           "192.168.168.108"
-#define SERVER_IP           "202.191.56.104"
+#define FLIE_LINK                   "./file_store_link.txt"
+#define FILE_USER                   "./phone_and_node.json"
+#define FILE_AQI_CON                "./aqi_and_concentration.json"
+#define FILE_NODE_NOT_WORK          "./node_not_work.txt"
+
+#define BUF_LEN             (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
+
 
 #define RECEIVE_IP          0
 #define NOT_RECEIVE_IP      1
@@ -107,10 +109,9 @@ void send_file(FILE *fp, int sockfd)
 
     while(fgets(data, SIZE, fp)!=NULL)
     {
-        printf("data: %s\n", data);
         if(send(sockfd, data, sizeof(data), 0)== -1)
         {
-            perror("[-] Error in sendung data");
+            perror("Error in sendung data");
             exit(1);
         }
         usleep(100000);
@@ -128,7 +129,7 @@ void *sock_send_file_user(void *arg)
     while(ipReceived == NULL)
     {
         printf("Wait to receive IP!\n");
-        sleep(1);
+        sleep(2);
     }
     
     clientSocket = socket(PF_INET, SOCK_STREAM, 0);
@@ -161,18 +162,18 @@ void *sock_send_file_user(void *arg)
             event = (struct inotify_event *)buff;
             if (event->mask & IN_CLOSE_WRITE)
             {
-                printf("IN_CLOSE_WRITE!\n");
                 if (!connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size))
                 {
-                    printf("[+]Connected to server.\n");
-                    fp = fopen(FILE_TO_SEND, "r");
+                    printf("Connected to server\n");
+                    fp = fopen(FILE_USER, "r");
                     if(fp == NULL)
                     {
-                        perror("[-]Error in reading file.");
+                        perror("Error in reading file.");
                         exit(1);
                     }
+                    printf("Start sending %s ...\n", FILE_USER);
                     send_file(fp,clientSocket);
-                    printf("[+] File data send successfully. \n");
+                    printf("Send %s successfully!\n", FILE_USER);
                     close(clientSocket);   
 
                     sleep(5);     
@@ -189,18 +190,19 @@ void *sock_send_file_user(void *arg)
 }
 }
 
-int write_file(int sockfd)
+int write_file(int sockfd, char *file_name)
 {
     int n; 
     FILE *fp;
     char buffer[SIZE];
 
-    fp = fopen(PATH_TO_FILE_AQI_CON, "w");
+    fp = fopen(file_name, "w");
     if(fp==NULL)
     {
-        perror("[-]Error in creating file.");
+        perror("Error in creating file.");
         exit(1);
     }
+    printf("Start updating %s ...\n", file_name);
 
     while(1)
     {
@@ -208,12 +210,12 @@ int write_file(int sockfd)
         if(n<=0)
         {
             fclose(fp);
+            printf("Update successfully!\n");
             break;
             return 0;
         }
         
         fprintf(fp, "%s", buffer);
-        printf("Update to file %s!\n", PATH_TO_FILE_AQI_CON);
         bzero(buffer, SIZE);
     }
 }
@@ -236,17 +238,14 @@ void *sock_receive_file_AQI(void *arg)
     bind(sockfd,(struct sockaddr*)&server_addr, sizeof(server_addr));
     listen(sockfd, 10);
     
-    printf("[+]Listening...\n");
+    printf("Listening on socket receive file AQI\n");
     
     while (1)
     {
         addr_size = sizeof(new_addr);
         new_sock = accept(sockfd,(struct sockaddr*)&new_addr, &addr_size);
 
-        if(!write_file(new_sock))
-        {
-            printf("Update done!\n");
-        }
+        write_file(new_sock, FILE_AQI_CON);
     }
 }
 
@@ -267,17 +266,14 @@ void *sock_receive_node_error(void *arg)
     bind(sockfd,(struct sockaddr*)&server_addr, sizeof(server_addr));
     listen(sockfd, 10);
     
-    printf("[+]Listening...\n");
+    printf("Listening on socket receive file node not working\n");
     
     while (1)
     {
         addr_size = sizeof(new_addr);
         new_sock = accept(sockfd,(struct sockaddr*)&new_addr, &addr_size);
 
-        if(!write_file(new_sock))
-        {
-            printf("Update done!\n");
-        }
+        write_file(new_sock, FILE_NODE_NOT_WORK);
     }
 }
 
