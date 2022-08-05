@@ -8,15 +8,21 @@
 #include <json-c/json.h>
 #include <pthread.h>
 #include <time.h>
+#include <semaphore.h>
 
-#define PATH_TO_PHONE_NODE          "/tmp/phone_vs_node.json"
+#define PATH_TO_PHONE_NODE          "/tmp/phone_and_node.json"
 #define PATH_TO_DATA_NODE           "/tmp/aqi_and_concentration.json"
 
-#define HOUR_TO_SEND            22
-#define MINUTE_TO_SEND          15
+#define HOUR_TO_SEND            9
+#define MINUTE_TO_SEND          0
+
 
 
 #define DEVICE "/dev/ttyUSB2"
+
+sem_t mutex;
+
+pthread_mutex_t lock;
 
 typedef struct
 {
@@ -105,12 +111,11 @@ void send_sms(char *msg, char *phoneNumber)
     send_to_uart("AT");
 
     send_to_uart("AT+CMGF=1");
-
+                
     send_to_uart(bufferPhone);
-
     send_to_uart(msg);
-
     send_to_uart("\x1A");
+                
 }
 
 /* Retrive phone number and command from respone of message */
@@ -255,25 +260,31 @@ int send_data_with_received_msg(char *respond)
     cmd_and_pNum = parse_msg(respond);
 
     /* Check if command is "ALL" -> send all data to user */
-    if((strcmp(cmd_and_pNum.cmd, "ALL") == 0) && (strlen(cmd_and_pNum.cmd) == 3))
-    {
+    // if((strcmp(cmd_and_pNum.cmd, "ALL") == 0) && (strlen(cmd_and_pNum.cmd) == 3))
+    // {
         data_to_send = get_data_by_phone_num(cmd_and_pNum.pNum);
-        if(data_to_send.addr == 0)
+        if((data_to_send.addr == 0)&& (strcmp(cmd_and_pNum.cmd, "ALL") == 0) && (strlen(cmd_and_pNum.cmd) == 3))
         {
-            printf("Node not exist!\n");
+            sprintf(msg, "Node khong ton tai!");
+            send_sms(msg, cmd_and_pNum.pNum);
         } 
-        else if(data_to_send.addr == -1)
+        else if((data_to_send.addr != -1)&& (strcmp(cmd_and_pNum.cmd, "ALL") != 0) && (strlen(cmd_and_pNum.cmd) != 3))
+        {
+            sprintf(msg, "Tin nhan sai cu phap. De xem chi tiet cac thong so hay gui ALL");
+            send_sms(msg, cmd_and_pNum.pNum);
+        }
+        else if(data_to_send.addr == -1) 
         {
             printf("Phone number not exist!\n");
         }
         else 
         {
             /* Attach parameter and send to user */
-            sprintf(msg, "Chi tiet cac thong so nhu sau: AQI = %f, PM2.5 = %f, CO = %f\n", 
+            sprintf(msg, "Chi tiet cac thong so nhu sau: AQI = %d, PM2.5 = %f, CO = %f\n", 
             data_to_send.aqi, data_to_send.pm2_5, data_to_send.co);
             send_sms(msg, cmd_and_pNum.pNum);
         }
-    }
+    // }
 }
 
 /* Thread read message and send sms acording to command from user */
@@ -285,6 +296,8 @@ void *read_msg(void *arg)
     
     while (1)
     {
+        sem_wait(&mutex);
+        
         /* Set message in text mode */
         send_to_uart("AT+CMGF=1");
 
@@ -292,13 +305,13 @@ void *read_msg(void *arg)
         send_to_uart("AT+CMGL=\"ALL\"");
         if (strlen(respond) == 20)
         {
-            printf(">>>>>>>>>>>>>>>>>>>Go to 1\n");
             printf("No message in SIM!\n");
+            sem_post(&mutex);
+
             goto time_break;
         }        
         do 
         {
-            printf(">>>>>>>>>>>>>>>>>>>Go to 2\n");
 
             /* Read message in i index */
             sprintf(cmd, "AT+CMGR=%d", i);
@@ -306,7 +319,6 @@ void *read_msg(void *arg)
 
             if(strlen(respond) != 16)
             {
-            printf(">>>>>>>>>>>>>>>>>>>Go to 3\n");
 
                 /* Send sms to user */
                 send_data_with_received_msg(respond);
@@ -318,16 +330,18 @@ void *read_msg(void *arg)
             }
             else
             {
-            printf(">>>>>>>>>>>>>>>>>>>Go to 4\n");
 
                 /* Threre is no message at all */
                 i = 0;
             }
+
         } while(i);
+        sem_post(&mutex);
 
     // sleep 3s before handle another message
     time_break:
         sleep(3);
+
     }
 }
 
@@ -381,33 +395,31 @@ void *send_daily(void *arg)
             parseDataFromAddr = parse_data_from_json_file(PATH_TO_DATA_NODE, json_object_get_int(node_addr));
 
             /* Compare value and send to user */ 
-            // if(parseDataFromAddr.aqi <= 50)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí tốt, không ảnh hưởng tới sức khỏe.", parseDataFromAddr.aqi);
-            // } 
-            // else if(parseDataFromAddr.aqi > 50 && parseDataFromAddr.aqi <= 100)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí bình thường. Tuy nhiên, đối với những người nhạy cảm có thể chịu những tác động nhất định tới sức khỏe.", parseDataFromAddr.aqi);
-            // }
-            // else if(parseDataFromAddr.aqi > 100 && parseDataFromAddr.aqi <= 150)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí kém. Những người nhạy cảm gặp phải các vấn đề về sức khỏe, những người bình thường ít ảnh hưởng.", parseDataFromAddr.aqi);
-            // }
-            // else if(parseDataFromAddr.aqi > 150 && parseDataFromAddr.aqi <= 200)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí xấu. Những người bình thường bắt đầu có các ảnh hưởng tới sức khỏe, nhóm người nhạy cảm có thể gặp những vấn đề sức khỏe nghiêm trọng hơn.", parseDataFromAddr.aqi);
-            // }
-            // else if(parseDataFromAddr.aqi > 200 && parseDataFromAddr.aqi <= 300)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí rất xấu. Cảnh báo hưởng tới sức khỏe: mọi người bị ảnh hưởng tới sức khỏe nghiêm trọng hơn.", parseDataFromAddr.aqi);
-            // }
-            // else if(parseDataFromAddr.aqi > 300 && parseDataFromAddr.aqi <= 500)
-            // {
-            //     sprintf(textToSend, "Chỉ số AQI là: %d. Chất lượng không khí nguy hại. Cảnh báo khẩn cấp về sức khỏe: toàn bộ dân số bị ảnh hưởng tới sức khỏe tới mức nghiêm trọng.", parseDataFromAddr.aqi);
-            // }
+            if(parseDataFromAddr.aqi <= 50)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi tot.", parseDataFromAddr.aqi);
+            } 
+            else if(parseDataFromAddr.aqi > 50 && parseDataFromAddr.aqi <= 100)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi binh thuong.", parseDataFromAddr.aqi);
+            }
+            else if(parseDataFromAddr.aqi > 100 && parseDataFromAddr.aqi <= 150)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi kem.", parseDataFromAddr.aqi);
+            }
+            else if(parseDataFromAddr.aqi > 150 && parseDataFromAddr.aqi <= 200)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi xau. ", parseDataFromAddr.aqi);
+            }
+            else if(parseDataFromAddr.aqi > 200 && parseDataFromAddr.aqi <= 300)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi ra xau.", parseDataFromAddr.aqi);
+            }
+            else if(parseDataFromAddr.aqi > 300 && parseDataFromAddr.aqi <= 500)
+            {
+                sprintf(textToSend, "Chi so AQI la: %d. Chat luong khong khi nguy hai.", parseDataFromAddr.aqi);
+            }
             
-
-            sprintf(textToSend, "Chi so AQI la: %d.", parseDataFromAddr.aqi);
 
             /* Get phone number array of node i*/
             json_object_object_get_ex(tmp, "phone", &phone_arr);
@@ -416,10 +428,14 @@ void *send_daily(void *arg)
             for (j = 0; j < lenNum; j++)
             {
                 /* Number j*/
+                sem_wait(&mutex);
                 num_arr = json_object_array_get_idx(phone_arr, j);
                 json_object_object_get_ex(num_arr, "num", &num);
-                printf("TEXT TO SENDDDDDDDDDDDDDDDDDDDDD: %s\n", textToSend);
+                printf(">>>>>>>>>>>>>>>>>>>>>>>> Send sms to: %s\n", json_object_get_string(num));
                 send_sms(textToSend, json_object_get_string(num));
+                sem_post(&mutex);
+                sleep(1);
+
             }
             
         }   
@@ -434,6 +450,8 @@ void *update_file_phone_vs_node(void *arg)
 
 int main()
 {
+    sem_init(&mutex, 0, 1);
+
     pthread_t thread_response_usr_id;
     pthread_t thread_send_daily;
 
