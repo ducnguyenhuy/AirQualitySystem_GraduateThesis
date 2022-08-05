@@ -275,12 +275,13 @@ int send_data_with_received_msg(char *respond)
         }
         else if(data_to_send.addr == -1) 
         {
-            printf("Phone number not exist!\n");
+            sprintf(msg, "So dien thoai chua dang ky. De su dung dich vu, soan tin theo cua phap DK gui 6868");
+            send_sms(msg, cmd_and_pNum.pNum);
         }
         else 
         {
             /* Attach parameter and send to user */
-            sprintf(msg, "Chi tiet cac thong so nhu sau: AQI = %d, PM2.5 = %f, CO = %f\n", 
+            sprintf(msg, "Chi tiet cac thong so nhu sau: AQI = %d, PM2.5 = %.2f, CO = %.2f\n", 
             data_to_send.aqi, data_to_send.pm2_5, data_to_send.co);
             send_sms(msg, cmd_and_pNum.pNum);
         }
@@ -431,7 +432,6 @@ void *send_daily(void *arg)
                 sem_wait(&mutex);
                 num_arr = json_object_array_get_idx(phone_arr, j);
                 json_object_object_get_ex(num_arr, "num", &num);
-                printf(">>>>>>>>>>>>>>>>>>>>>>>> Send sms to: %s\n", json_object_get_string(num));
                 send_sms(textToSend, json_object_get_string(num));
                 sem_post(&mutex);
                 sleep(1);

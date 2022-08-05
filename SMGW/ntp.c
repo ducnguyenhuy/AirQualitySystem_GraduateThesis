@@ -127,10 +127,10 @@ void update_time(void)
     ts = *localtime(&(time_struct));
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts);
 
-    printf("%s\n", buf);
+    // printf("%s\n", buf);
     sprintf(cmd, "date -s \"%s\"", buf);
 
-    printf("Cmd: %s\n", cmd);
+    printf(">>>>>>>>>>>>>>>>> Cmd: %s\n", cmd);
     system(cmd);
 }
 
@@ -140,6 +140,6 @@ int main(void)
     g_config.timezone = 7;
 
     update_time();
-
+    printf(">>>>>>>>>>>>>>>>> Update time OK\n");
     return 0;
 }
