@@ -167,7 +167,7 @@ typedef struct
 typedef struct
 {
     int addr;
-    float aqi;
+    int aqi;
     float pm2_5;
     float co;
 } data_write_to_json_t;
@@ -225,7 +225,7 @@ int check_node_addr(int nodeAddr)
     return -1;
 }
 
-float cal_aqi_co(data_of_node_t *data_node)
+int cal_aqi_co(data_of_node_t *data_node)
 {
     float co_mean;
     co_mean = mean_of_co(data_node);
@@ -239,7 +239,7 @@ float cal_aqi_co(data_of_node_t *data_node)
         }
     }
 
-    float aqi = (((I[i + 1] - I[i]) / (BP_CO[i + 1] - BP_CO[i])) * (co_mean - BP_CO[i]) + I[i]);
+    int aqi = (int)(((I[i + 1] - I[i]) / (BP_CO[i + 1] - BP_CO[i])) * (co_mean - BP_CO[i]) + I[i]);
 
     if (i == 7)
     {
@@ -251,7 +251,7 @@ float cal_aqi_co(data_of_node_t *data_node)
     }
 }
 
-float cal_aqi_pm25(data_of_node_t *data_node)
+int cal_aqi_pm25(data_of_node_t *data_node)
 {
     float weightIndex;
     float Cmax, Cmin;
@@ -318,7 +318,7 @@ float cal_aqi_pm25(data_of_node_t *data_node)
         }
     }
     /* Formula air quality */
-    float aqi = (((I[j + 1] - I[j]) / (BP_PM25[j + 1] - BP_PM25[j])) * (nowCast - BP_PM25[j]) + I[j]);
+    int aqi = (int)(((I[j + 1] - I[j]) / (BP_PM25[j + 1] - BP_PM25[j])) * (nowCast - BP_PM25[j]) + I[j]);
     if (j == 7)
     {
         return I[j];
@@ -326,6 +326,19 @@ float cal_aqi_pm25(data_of_node_t *data_node)
     else
     {
         return aqi;
+    }
+}
+
+int cal_aqi(int aqiPM2_5, float aqiCO)
+{
+    int int_aqiCO = (int)aqiCO;
+    if(int_aqiCO >= aqiPM2_5)
+    {
+        return int_aqiCO;
+    }
+    else
+    {
+        return aqiPM2_5;
     }
 }
 
@@ -1663,17 +1676,29 @@ void *cal_and_write_to_file(void *arg)
         creat_file(FILE_NAME);
     }
 
+    int aqiCO = 0, aqiPM2_5 = 0;
     while (1)
     {
-        sleep(3);
+        sleep(10);
         for (i = 0; i < bufferNodeIndex; i++)
         {
+            printf("Update AQI value\n");
+
+            aqiCO = cal_aqi_co(&gBufferNode[i]);
+            aqiPM2_5 = cal_aqi_pm25(&gBufferNode[i]);
+            // printf(">>>>>>>>>>>>>>>>>>>> Go to 1\n");
             tmpDataJson.addr = gBufferNode[i].nodeAddr;
-            tmpDataJson.aqi = cal_aqi_pm25(&gBufferNode[i]);
-            tmpDataJson.pm2_5 = gBufferNode[i].valPM25.buff_12_h[gBufferNode[i].buff12hIndex];
+            tmpDataJson.aqi = cal_aqi(aqiPM2_5, aqiCO);
+            // printf(">>>>>>>>>>>>>>>>>>>> Go to 2\n");
+
+            tmpDataJson.pm2_5 = mean_of_pm25(&gBufferNode[i]);
+            // printf(">>>>>>>>>>>>>>>>>>>> Go to 3\n");
+
             tmpDataJson.co = mean_of_co(&gBufferNode[i]);
-            
+            // printf(">>>>>>>>>>>>>>>>>>>> Go to 4\n");
             write_to_json_file(FILE_NAME, tmpDataJson);
+            // printf(">>>>>>>>>>>>>>>>>>>> Go to 5\n");
+
             usleep(10000);
         }
     }
@@ -1704,10 +1729,8 @@ void *check_error_node(void *arg)
                 delete_node_in_file_json(gBufferNode[i].nodeAddr);
                 remove_node_in_gBuffer(gBufferNode[i].nodeAddr);
                 pthread_mutex_unlock(&mx_concent);
-                goto sleep_5s;
             }
         }
-sleep_10s:
-        sleep(5);
+        sleep(10);
     }
 }
