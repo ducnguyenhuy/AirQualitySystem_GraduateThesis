@@ -17,8 +17,8 @@
 #include <limits.h>
 
 
-// #define SERVER_IP           "202.191.56.104"
-#define SERVER_IP           "192.168.168.108"
+#define SERVER_IP           "202.191.56.104"
+// #define SERVER_IP           "192.168.168.108"
 #define PORT_IP             5592
 #define PORT_AQI_CON        5591
 #define PORT_ERROR_NODE     5590

@@ -13,10 +13,10 @@
 #include <sys/inotify.h>
 #include <limits.h>
 #include <sys/wait.h>
+#include <time.h>
 
-
-#define SERVER_IP           "192.168.168.108"
-// #define SERVER_IP           "202.191.56.104"
+// #define SERVER_IP           "192.168.168.108"
+#define SERVER_IP           "202.191.56.104"
 
 #define PORT_IP             5592
 #define PORT_AQI_CON        5591
@@ -195,6 +195,20 @@ int write_file(int sockfd, char *file_name)
     int n; 
     FILE *fp;
     char buffer[SIZE];
+    char file_aqi[100];
+    // write to file AQI with timestamp
+    if(!strcmp(file_name, FILE_AQI_CON))
+    {
+        time_t rawtime;
+        struct tm * timeinfo;
+        char output[100];
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+        
+        sprintf(file_aqi, "./aqi_and_concentration_%d%d%d_%d%d%d.json", 
+        timeinfo->tm_year + 1900, timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+        file_name = file_aqi;
+    }
 
     fp = fopen(file_name, "w");
     if(fp==NULL)
