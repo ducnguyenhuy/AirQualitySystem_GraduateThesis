@@ -13,8 +13,8 @@
 #include "sensor.h"
 
 /* global variable */
-extern uint32_t gp2yAdcValue;
-extern uint32_t mq135AdcValue;
+extern float mq135Value;
+extern float gp2yValue;
 
 #define EEPROM_MSB_ADDR 0x08080000
 
@@ -489,7 +489,7 @@ static void LoRa_MainProcess(void)
 				
 			
 				
-				sprintf(cmd_send, "%d, %d\r\n", gp2yAdcValue, mq135AdcValue);
+				sprintf(cmd_send, "%f, %f\r\n", gp2yValue, mq135Value);
 				
 				detector_board.dataLen = 45;
 				memcpy(tx_buffer, cmd_send, detector_board.dataLen);
@@ -524,6 +524,7 @@ static void LoRa_MainProcess(void)
 					DEBUG_USER("TxFail\r\n");
 				}
 				// finally enter the standby mode
+				DEBUG("Enter the standby mode\n");
 				HAL_PWR_EnterSTANDBYMode();
 				break;
 			}

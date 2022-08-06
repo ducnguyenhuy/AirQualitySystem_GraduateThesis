@@ -63,10 +63,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint32_t gp2yAdcValue;
-uint32_t mq135AdcValue;
+float gp2yValue;
+float mq135Value;
 
+int ADC_GP2Y, ADC_MQ135;
+float volGP2Y, volMQ135;
 char *str;
+int R0 = 830, R2 = 4700;
+float RS, PPM_CO;
 /* USER CODE END 0 */
 
 /**
@@ -106,11 +110,25 @@ int main(void)
   MX_TIM7_Init();
 	HAL_TIM_Base_Start(&htim7);
 	
-	gp2yAdcValue= gp2y_adc_measure();  
-	mq135AdcValue = mq135_adc_measure();
+	// Convert PM2.5 value to ug
+	ADC_GP2Y= gp2y_adc_measure();  
+	ADC_MQ135 = mq135_adc_measure();
 	
+	volGP2Y = 3.3f * ADC_GP2Y / 4096 * 2;
+	volMQ135 = 3.3f * ADC_MQ135 / 4096;
 	
+	gp2yValue = (0.17*volGP2Y-0.1)*1000;
 	
+	if(gp2yValue < 0)
+	{
+			gp2yValue = 0;
+	}
+	
+	RS = R2 * (1 - volMQ135);
+	RS = RS/volMQ135;
+	
+	PPM_CO = 180 - 50*(RS/R0);
+	mq135Value =  PPM_CO/2;
   /* USER CODE BEGIN 2 */
 	//=================================================================
 	/* Clear the WU FLAG */
@@ -127,7 +145,7 @@ int main(void)
 		
 		
 		// display the string
-		DEBUG("Wakeup from the STANDBY MODE \n");
+		// DEBUG("Wakeup from the STANDBY MODE \n");
 		
 		// disable the WAKEUP PIN
 		HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
@@ -149,7 +167,7 @@ int main(void)
   }
 	
 	// one last string to be sure
-	DEBUG("STANDBY MODE is ON\n");
+	// DEBUG("STANDBY MODE is ON\n");
 
 	
   /* USER CODE END 2 */
